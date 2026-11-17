@@ -44,12 +44,14 @@
       <li><a href="#references">References</a></li>
     </ul>
   </nav>
- <button class="print-button" onclick="window.print()" style="position: fixed; bottom: 24px; right: 24px; padding: 10px 16px; background: #2563eb; color: white; border: none; border-radius: 8px; cursor: pointer; box-shadow: 0 2px 6px rgba(0,0,0,0.15); font-size: 0.9rem; z-index: 2000;">  Print This Page </button>
+  <button class="print-button" onclick="window.print()"
+    style="position: fixed; bottom: 24px; right: 24px; padding: 10px 16px; background: #2563eb; color: white; border: none; border-radius: 8px; cursor: pointer; box-shadow: 0 2px 6px rgba(0,0,0,0.15); font-size: 0.9rem; z-index: 2000;">
+     Print This Page </button>
 
   <h1 id="top">Smart clock system </h1>
-<div id="print-hero">
+  <div id="print-hero">
     <img src="" alt="">
-</div>
+  </div>
 
   <section id="information">
     <h2>Project Information</h2>
@@ -65,40 +67,53 @@
 
   <section id="introduction">
     <h2>Introduction</h2>
-   <p>The main issues our group aims to address are
-        <strong>UN Sustainable Development Goal 3: Good Health and Well-Being</strong>
-        and <strong>Goal 13: Climate Action</strong>.    </p>
-
-<p>
-        With these goals in mind, our project focuses on helping individuals
-        make informed decisions about their daily routines and clothing
-        choices based on outdoor weather conditions. We aim to improve
-        people's comfort and well-being when waking up, travelling to school,
-        or commuting to work. For example, our project will help individuals
-        determine whether they should wear a light jacket or a heavier
-        winter coat depending on the outdoor temperature.
+    <p>The main issues our group aims to address are
+      <strong>UN Sustainable Development Goal 3: Good Health and Well-Being</strong>
+      and <strong>Goal 13: Climate Action</strong>.
     </p>
 
- <p>
-        To accomplish this, our project uses an
-        <strong>Arduino Uno</strong>,
-        a <strong>DS3231 Real-Time Clock (RTC) module</strong>,
-        a <strong>DHT22 temperature and humidity sensor</strong>,
-        and a <strong>16x2 I2C LCD display</strong>.
-        Together, these components provide users with accurate time and
-        temperature readings, allowing them to check the current conditions
-        and make better decisions before heading outdoors. The clock also
-        displays the time based on the configured time zone.
+    <p>
+      With these goals in mind, our project focuses on helping individuals
+      make informed decisions about their daily routines and clothing
+      choices based on outdoor weather conditions. We aim to improve
+      people's comfort and well-being when waking up, travelling to school,
+      or commuting to work. For example, our project will help individuals
+      determine whether they should wear a light jacket or a heavier
+      winter coat depending on the outdoor temperature.
     </p>
 
-     <p>
-        Our overall objective is to create a practical, accessible, and
-        reliable device that promotes everyday comfort, supports informed
-        clothing choices, and encourages greater awareness of environmental
-        conditions.
+    <p>
+      To accomplish this, our project uses an
+      <strong>Arduino Uno</strong>,
+      a <strong>DS3231 Real-Time Clock (RTC) module</strong>,
+      a <strong>DHT22 temperature and humidity sensor</strong>,
+      and a <strong>16x2 I2C LCD display</strong>.
+      Together, these components provide users with accurate time and
+      temperature readings, allowing them to check the current conditions
+      and make better decisions before heading outdoors. The clock also
+      displays the time based on the configured time zone.
     </p>
-      
-      
+
+    <p>
+      Our overall objective is to create a practical, accessible, and
+      reliable device that promotes everyday comfort, supports informed
+      clothing choices, and encourages greater awareness of environmental
+      conditions.
+    </p>
+
+    <p>
+      Something that might make our SmartClock harder to finish is the lack of time because the material required to
+      build a sensor that can change the temperature at any time to help people get through the seasons and if the
+      temperature would change if we activate it, or will not do anything. if the alarm can activate on the time set for
+      a current period when it is supposed to turn on, and if the current time will show up on the display of the smart
+      clock and check if it will keep up the accurate time. Is it able to read the information clearly, and give them an
+      easy time to get an understanding of how the SmartClock works, and make the SmartClock able to shutdown properly.
+
+
+    </p>
+
+
+
   </section>
 
   <section id="circuit-diagram">
@@ -198,20 +213,20 @@
   <section id="prototype">
     <h2>Prototype</h2>
     <p>The following image shows the assembled prototype on a breadboard.</p>
-    <img  id="prototypeImage" src="prototype.jpg" alt="Collision warning system prototype">
+    <img id="prototypeImage" src="prototype.jpg" alt="Collision warning system prototype">
   </section>
 
   <section id="code">
     <h2>Arduino Code</h2>
-    <p>The following Arduino code controls the system, lighting LEDs and activating the buzzer based on distance readings from the HC-SR04 sensor.</p>
-<div class="code-container" style="position: relative;">
-      <button class="copy-btn" onclick="copyCode()" 
-              style="position:absolute; top:8px; right:8px; z-index:10;">
-          Copy
+    <p>The following Arduino code controls the system, lighting LEDs and activating the buzzer based on distance
+      readings from the HC-SR04 sensor.</p>
+    <div class="code-container" style="position: relative;">
+      <button class="copy-btn" onclick="copyCode()" style="position:absolute; top:8px; right:8px; z-index:10;">
+        Copy
       </button>
 
       <pre class="line-numbers">
- 
+
   <code id="arduinoCode" class="language-cpp">
 // Collision Warning System with Distance Sensor (HC-SR04)
 // Author: Ana Rodrigues
@@ -289,14 +304,14 @@ void loop() {
     </code>
   </pre>
 
-    <script>
-      function copyCode() {
-        const code = document.getElementById('arduinoCode').innerText;
-        navigator.clipboard.writeText(code).then(() => {
-          alert('Code copied to clipboard!');
-        });
-      }
-    </script>
+      <script>
+        function copyCode() {
+          const code = document.getElementById('arduinoCode').innerText;
+          navigator.clipboard.writeText(code).then(() => {
+            alert('Code copied to clipboard!');
+          });
+        }
+      </script>
   </section>
 
 
@@ -307,40 +322,90 @@ void loop() {
       sustainable through reusable components.</p>
   </section>
 
- <section id="references">
-  <h2>References</h2>
+  <section>
+    <h2>References</h2>
 
-  <ul>
-    <li>
-      Mahade DIY 
-      <em>
-Arduino Digital Clock & Temperature Monitor || RTC DS3231 + DHT11 + LCD Display</em> 
-      
-      <a href="https://www.youtube.com/watch?v=vwYhJgjaZIk" target="_blank" rel="noopener noreferrer">
-       https://www.youtube.com/watch?v=vwYhJgjaZIk
-      </a>
-    </li>
+    <p>
+      The following resources were used to research the
+      components, functions, and design ideas behind our
+      digital clock project. These references provide
+      tutorials, examples, and technical information that
+      support the development of our device.
+    </p>
 
-    <li>
-      SPAC Junior Developer.
-      <em>
-This Arduino Alarm Clock Is Smarter Than You Think!</em> 
-      
-      <a href="https://www.youtube.com/watch?v=AFQacjS0UVM" target="_blank" rel="noopener noreferrer">
-        https://www.youtube.com/watch?v=AFQacjS0UVM
-      </a>
-    </li>
+    <ul>
+      <li>
+        Mahade DIY.
+        <em>
+          Arduino Digital Clock & Temperature Monitor ||
+          RTC DS3231 + DHT11 + LCD Display.
+        </em>
+        <a href="https://www.youtube.com/watch?v=vwYhJgjaZIk" target="_blank" rel="noopener noreferrer">
+          Watch on YouTube
+        </a>
+      </li>
 
-    <li>
-      अभिषेक मोरे. 
-      <em>temperature LM35 sensor with Arduino.</em> 
-      Instructables. 
-      <a href="https://www.tinkercad.com/things/iJpbrSBpP1P-temperature-lm35-sensor-with-arduino" target="_blank" rel="noopener noreferrer">
-        https://www.tinkercad.com/things/iJpbrSBpP1P-temperature-lm35-sensor-with-arduino
-      </a>
-    </li>
-  </ul>
-</section>
+      <li>
+        Arduino.
+        <em>Arduino Uno Official Documentation.</em>
+        <a href="https://docs.arduino.cc/hardware/uno-rev3/" target="_blank" rel="noopener noreferrer">
+          Arduino Documentation
+        </a>
+      </li>
+
+      <li>
+        SPAC Junior Developer.
+        <em>This Arduino Alarm Clock Is Smarter Than You Think!</em>
+        <a href="https://www.youtube.com/watch?v=AFQacjS0UVM" target="_blank" rel="noopener noreferrer">
+          Watch on YouTube
+        </a>
+      </li>
+
+      <li>
+        अभिषेक मोरे.
+        <em>Temperature LM35 Sensor with Arduino.</em>
+        Instructables / Tinkercad.
+        <a href="https://www.tinkercad.com/things/iJpbrSBpP1P-temperature-lm35-sensor-with-arduino" target="_blank"
+          rel="noopener noreferrer">
+          View Tinkercad Project
+        </a>
+      </li>
+
+      <li>
+        Adafruit.
+        <em>DS3231 Precision RTC Breakout Guide.</em>
+        <a href="https://learn.adafruit.com/adafruit-ds3231-precision-rtc-breakout/arduino-usage" target="_blank"
+          rel="noopener noreferrer">
+          DS3231 RTC Guide
+        </a>
+      </li>
+
+      <li>
+        Adafruit.
+        <em>Using a DHTXX Sensor with Arduino.</em>
+        <a href="https://learn.adafruit.com/dht/using-a-dhtxx-sensor-with-arduino" target="_blank"
+          rel="noopener noreferrer">
+          DHT22 Sensor Guide
+        </a>
+      </li>
+
+      <li>
+        Arduino.
+        <em>LCD Displays Tutorial.</em>
+        <a href="https://docs.arduino.cc/learn/electronics/lcd-displays/" target="_blank" rel="noopener noreferrer">
+          LCD Display Guide
+        </a>
+      </li>
+
+      <li>
+        Adafruit.
+        <em>RTClib Library.</em>
+        <a href="https://github.com/adafruit/RTClib" target="_blank" rel="noopener noreferrer">
+          View GitHub Repository
+        </a>
+      </li>
+    </ul>
+  </section>
 
 
 
