@@ -1,0 +1,2252 @@
+<!DOCTYPE html>
+<html  lang="en" dir="ltr" prefix="og: https://ogp.me/ns#">
+  <head>
+    <meta charset="utf-8" />
+<meta name="description" content="In this article we discussed how RTC Module works and how we can interface it with Arduino to build DIY Arduino digital clock." />
+<meta name="abstract" content="Arduino RTC Module Project - Arduino digital clock circuit and code" />
+<meta name="keywords" content="Arduino DS3231 RTC, Arduino projects for beginners, learn arduino, Arduino projects, Arduino RTC Module Project, arduino digital clock Code, Arduin diy clock Circuit, RTC Module Projects" />
+<meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1" />
+<link rel="canonical" href="https://circuitdigest.com/microcontroller-projects/interfacing-ds3231-rtc-with-arduino-and-diy-digital-clock" />
+<meta property="og:title" content="DS3231 RTC (Real Time Clock) Interfacing with Arduino to build DIY Digital Clock" />
+<meta property="og:image" content="https://circuitdigest.com/sites/default/files/projectimage_mic/Arduino-DS3231-RTC-Module.jpg" />
+<meta name="Generator" content="Drupal 10 (https://www.drupal.org)" />
+<meta name="MobileOptimized" content="width" />
+<meta name="HandheldFriendly" content="true" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<script type="application/ld+json">{
+    "@context": "https://schema.org",
+    "@graph": [
+        {
+            "@type": "TechArticle",
+            "name": "DS3231 RTC (Real Time Clock) Interfacing with Arduino to build DIY Digital Clock",
+            "headline": "Arduino DS3231 RTC Module Tutorial - How to Interface RTC Module with Arduino to build Digital Clock",
+            "description": "In this article we discussed how RTC Module works and how we can interface it with Arduino to build DIY Arduino digital clock.",
+            "image": {
+                "@type": "ImageObject",
+                "url": "/sites/default/files/projectimage_mic/Arduino-DS3231-RTC-Module.jpg",
+                "width": "750",
+                "height": "500"
+            },
+            "datePublished": "2022-05-11T16:12:46+0530",
+            "dateModified": "2025-08-11T18:01:48+0530",
+            "author": {
+                "@type": "Person",
+                "name": "Harshil Patel",
+                "url": "https://circuitdigest.com/users/harshilpatelhp99"
+            },
+            "publisher": {
+                "@type": "Organization",
+                "@id": "https://circuitdigest.com",
+                "name": "CircuitDigest",
+                "url": "https://circuitdigest.com",
+                "sameAs": [
+                    "https://www.youtube.com/Circuitdigest",
+                    "https://www.linkedin.com/company/circuit-digest",
+                    "https://www.facebook.com/circuitdigest/",
+                    "https://www.instagram.com/circuit_digest"
+                ],
+                "logo": {
+                    "@type": "ImageObject",
+                    "url": "https://circuitdigest.com/sites/default/files/inline-images/logo_circuitdigest.png"
+                }
+            }
+        }
+    ]
+}</script>
+<link rel="icon" href="/sites/default/files/logocd_fevicon.png" type="image/png" />
+
+    <title>Arduino DS3231 RTC Module Tutorial - How to Interface RTC Module with Arduino to build Digital Clock</title>
+            <link rel="preload" href="/themes/circuitdigest/vendor/lato/lato-400-latin.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="/themes/circuitdigest/vendor/lato/lato-700-latin.woff2" as="font" type="font/woff2" crossorigin>
+            <link rel="preload" href="/themes/circuitdigest/vendor/font-awesome-4.7/fonts/fontawesome-webfont.woff2?v=4.7.0" as="font" type="font/woff2" crossorigin>
+    <link rel="stylesheet" media="all" href="/sites/default/files/css/css_sQb8NwovcQBXSzMUuS-L-wCmhJyLzOlqSmeuIr54jyQ.css?delta=0&amp;language=en&amp;theme=circuitdigest&amp;include=eJxlj1EOhDAIRC_UtEdqSkVtLEsDdBtvv0Y_Vnd_SObNBBjd1ZACJEWXi-RebCoLqgVbkX5Zk6LkBsLMQhGYTU1SC3_Efb1ZEuFg2dy74NBwTk889YrOIBIuR-DVr4P-Rh4uVM5bVNsreqj9-KyrMcVrUXgol1OzvKaz1gfgJFmO" />
+<link rel="stylesheet" media="all" href="/sites/default/files/css/css_8ceZg8X7LZEaZdNJnsSe7RJlBkCeLo4UNpEwOjrRe7U.css?delta=1&amp;language=en&amp;theme=circuitdigest&amp;include=eJxlj1EOhDAIRC_UtEdqSkVtLEsDdBtvv0Y_Vnd_SObNBBjd1ZACJEWXi-RebCoLqgVbkX5Zk6LkBsLMQhGYTU1SC3_Efb1ZEuFg2dy74NBwTk889YrOIBIuR-DVr4P-Rh4uVM5bVNsreqj9-KyrMcVrUXgol1OzvKaz1gfgJFmO" />
+
+    
+
+                  <style type="text/css">
+        @media (min-width: 768px){
+        .col-sm-9 { width: 58%; margin-left: 7.25%; }
+        .col-sm-3 { width: 27.5%; }
+        .view-category-wise-views .views-view-grid .views-col, .view-articles-listing .views-view-grid .views-col, .view-electronic-circuit-listing .views-view-grid .views-col {min-width: 258px;}
+        }
+      </style>
+                        <div id='div-gpt-ad-1640869785778-0' style='min-width: 120px; min-height: 600px; position: fixed;  /*right: 55.5%;*/ margin: 0 540px 0 0; z-index: 99'>
+ <script type="9ed7aeb7ba36c64b3b7181b0-text/javascript">
+   googletag.cmd.push(function() { googletag.display('div-gpt-ad-1640869785778-0'); });
+ </script>
+</div>
+ <div id='div-gpt-ad-1640869848371-0' style='min-width: 120px; min-height: 600px;position: fixed;   margin: 0 0 0 540px; /*left: 55.5%;*/ right: 0.2%; z-index: 99'>
+ <script type="9ed7aeb7ba36c64b3b7181b0-text/javascript">
+   googletag.cmd.push(function() { googletag.display('div-gpt-ad-1640869848371-0'); });
+ </script>
+</div>
+                           
+
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script data-cfasync="false" async src="https://www.googletagmanager.com/gtag/js?id=G-2NDDC60E6B"></script>
+<script data-cfasync="false">
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-2NDDC60E6B');
+</script>
+
+
+
+
+
+ <!--Google DFP code-->
+<script src="https://securepubads.g.doubleclick.net/tag/js/gpt.js" type="9ed7aeb7ba36c64b3b7181b0-text/javascript"></script>
+<script type="9ed7aeb7ba36c64b3b7181b0-text/javascript">
+window.googletag = window.googletag || {cmd: []};
+</script>
+
+<script type="9ed7aeb7ba36c64b3b7181b0-text/javascript">
+  googletag.cmd.push(function() {
+  var mapping_leaderboard = googletag.sizeMapping().
+  addSize([992, 0], [728, 90]). //desktop
+  addSize([768, 0], [728, 90]). //tablet
+  addSize([320, 0], [[336, 42],[300, 50]]). //mobile
+  //addSize([0, 0], [[728, 90], [1, 1]]). //other
+  build();
+
+ //   googletag.defineSlot('/21034905/boombox2', [300, 250], 'div-gpt-ad-1533626231783-1').addService(googletag.pubads());
+ //   googletag.defineSlot('/21034905/skyscraper_ad', [160, 600], 'div-gpt-ad-1490853271798-1').addService(googletag.pubads());
+  //  googletag.defineSlot('/21034905/welcome_ad', [640, 480], 'div-gpt-ad-1490853271798-2').addService(googletag.pubads());
+  googletag.defineSlot('/21034905/welcome_ad', [640, 480], 'div-gpt-ad-1569943024333-0').addService(googletag.pubads());
+//  googletag.defineSlot('/21034905/welcome-banner-mobile', [300, 225], 'div-gpt-ad-1611903778314-0').addService(googletag.pubads());
+//  googletag.defineSlot('/21034905/boombox_bottom', [300, 250], 'div-gpt-ad-1533626231783-0').addService(googletag.pubads());
+  googletag.defineSlot('/21034905/boombox_bottom', [300, 250], 'div-gpt-ad-1632828458996-0').addService(googletag.pubads());
+  googletag.defineSlot('/21034905/leaderboard', [728, 90], 'div-gpt-ad-1491291145553-2').defineSizeMapping(mapping_leaderboard).addService(googletag.pubads());
+  // frontrightbar  googletag.defineSlot('/21034905/content_top', [650, 90], 'div-gpt-ad-1519570476979-1').addService(googletag.pubads());
+  googletag.defineSlot('/21034905/Skyscraper_ad2', [160, 600], 'div-gpt-ad-1508834807558-0').addService(googletag.pubads());
+    googletag.defineSlot('/21034905/Welcome_Ad2', [640, 480], 'div-gpt-ad-1508834807558-1').addService(googletag.pubads());
+//  googletag.defineSlot('/21034905/Leaderboard_Homepage_600x90', [600, 90], 'div-gpt-ad-1519570476979-0').addService(googletag.pubads());
+  googletag.defineSlot('/21034905/Billboard', [970, 250], 'div-gpt-ad-1522423126716-0').setCollapseEmptyDiv(false).addService(googletag.pubads()); // CLS: box is reserved in style.css, never collapse it
+  //googletag.defineSlot('/21034905/components101_billboard', [970, 250], 'div-gpt-ad-1577888984385-0').addService(googletag.pubads());
+   googletag.defineSlot('/21034905/cd_digikey_billboard_bottom', [970, 250], 'div-gpt-ad-1626868066018-0').addService(googletag.pubads()); //footer bill board
+  googletag.defineSlot('/21034905/Welcome_Ad3', [640, 480], 'div-gpt-ad-1632744355244-0').addService(googletag.pubads());
+//    googletag.defineSlot('/21034905/Welcome_Ad4', [640, 480], 'div-gpt-ad-1530018046511-1').addService(googletag.pubads());
+  //googletag.defineSlot('/21805061584/CA_CircuitDigest', [300, 250], 'div-gpt-ad-1561528735888-0').addService(googletag.pubads()); <!-- cyber media intel campaign -->
+  //googletag.defineSlot('/21034905/cd-leaderboard-in-content', [728, 90], 'div-gpt-ad-1572526743616-0').addService(googletag.pubads()); <!-- analog devices ad -->
+  googletag.defineSlot('/21034905/Leaderboard_2', [728, 90], 'div-gpt-ad-1575031687404-0').addService(googletag.pubads()); <!-- analog devices ad 2-->
+    googletag.defineSlot('/21034905/track_imp_1x1', [1, 1], 'div-gpt-ad-1572871798331-0').addService(googletag.pubads());
+  googletag.defineSlot('/21034905/adi_track_pixel', [1, 1], 'div-gpt-ad-1573540406783-0').addService(googletag.pubads());
+  googletag.defineSlot('/21034905/CD_Track_3', [1, 1], 'div-gpt-ad-1575031611223-0').addService(googletag.pubads());
+//  googletag.defineSlot('/21034905/boombox2', [300, 250], 'div-gpt-ad-1580621619978-0').addService(googletag.pubads());
+  googletag.defineSlot('/21034905/boombox2', [300, 250], 'div-gpt-ad-1626353864327-0').addService(googletag.pubads());
+  googletag.defineSlot('/21034905/cd_half_page_ad', [300, 600], 'div-gpt-ad-1593583401069-0').addService(googletag.pubads()); //mouser RHS floating ad
+//  googletag.defineSlot('/21034905/cd_digikey_billboard_bottom', [970, 250], 'div-gpt-ad-1598511690090-0').addService(googletag.pubads());  //cd_digikey_billboard_bottom
+  googletag.defineSlot('/21034905/cd_billboard_banner_mobile', [300, 200], 'div-gpt-ad-1619520102481-0').addService(googletag.pubads());
+  googletag.defineSlot('/21034905/cd_small_leaderboard_banner_mobile', [300, 90], 'div-gpt-ad-1619520139575-0').addService(googletag.pubads());
+
+  //googletag.defineSlot('/21034905/C101_partstack_trackingpixel', [1, 1], 'div-gpt-ad-1704784866813-0').addService(googletag.pubads());
+     googletag.defineSlot('/21034905/c101_wallpaper_banner_left', [120, 600], 'div-gpt-ad-1625818497950-0').addService(googletag.pubads());
+   googletag.defineSlot('/21034905/c101_wallpaper_banner_right', [120, 600], 'div-gpt-ad-1625818544655-0').addService(googletag.pubads());
+   googletag.defineSlot('/21034905/c101_wallpaper_banner_left_2', [120, 600], 'div-gpt-ad-1640869785778-0').addService(googletag.pubads());
+   googletag.defineSlot('/21034905/c101_wallpaper_banner_right_2', [120, 600], 'div-gpt-ad-1640869848371-0').addService(googletag.pubads());
+   
+     googletag.defineSlot('/21034905/CD_Half_Page_Banner2', [300, 600], 'div-gpt-ad-1719307821746-0').addService(googletag.pubads());
+     googletag.defineSlot('/21034905/billboard_3', [970, 250], 'div-gpt-ad-1721987993455-0').addService(googletag.pubads());
+    googletag.defineSlot('/21034905/half-page-banner-2', [300, 600], 'div-gpt-ad-1735975955798-0').addService(googletag.pubads());
+    googletag.defineSlot('/21034905/C101_partstack_trackingpixel', [1, 1], 'div-gpt-ad-1704784866813-0').addService(googletag.pubads()); //pcbshop tracking pixel c101
+    googletag.pubads().enableSingleRequest();
+    googletag.pubads().collapseEmptyDivs();
+    googletag.enableServices();
+  });
+</script>
+
+
+
+<script type="9ed7aeb7ba36c64b3b7181b0-text/javascript"> window._peq = window._peq || []; window._peq.push(["init"]); </script>
+<script type="9ed7aeb7ba36c64b3b7181b0-text/javascript">(function () { function pe() { var s = document.createElement('script'); s.src = 'https://clientcdn.pushengage.com/core/dbb130feab257219df5ec315dceda764.js'; s.async = true; document.head.appendChild(s); } if (document.readyState === 'complete') { pe(); } else { addEventListener('load', pe); } })();</script>
+
+<style>
+@media only screen and (max-width:1360px){
+   #div-gpt-ad-1625818497950-0, #div-gpt-ad-1625818544655-0{display:none;}
+   #div-gpt-ad-1640869785778-0, #div-gpt-ad-1640869848371-0{display:none;}
+}
+</style>
+  <style>.userprofile_bg .profile > .btn-block { display: none; }</style>
+
+
+
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    "description": "Circuit Digest is a one-stop place for Tech enthusiasts to get the latest news in the semiconductor industry, Articles, Tutorials, and DIY projects to inspire electronics engineers with the latest technology and trends.",
+    "name": "CircuitDigest",
+    "url": "https://circuitdigest.com/",
+    "image": "https://circuitdigest.com/themes/circuitdigest/images/semicon_logo1.png",
+    "logo": "https://circuitdigest.com/sites/default/files/circuitdigest_logo_0.png",
+    "address": {
+      "@type": "PostalAddress",
+      "streetAddress": "665, Siddharth Nagar-A, Malviya Nagar",
+      "addressLocality": "Jaipur",
+      "addressRegion": "Rajasthan",
+      "postalCode": "302017"
+    },
+    "sameAs": [
+      "https://twitter.com/circuitdigest",
+      "https://www.facebook.com/circuitdigest",
+      "https://www.linkedin.com/company/circuit-digest",
+      "https://www.instagram.com/circuit_digest/",
+      "https://www.youtube.com/Circuitdigest",
+      "https://www.crunchbase.com/organization/circuit-digest"
+    ]
+  }
+  </script>
+
+    <script type="application/ld+json">
+  {
+    "@context": "https://schema.org/",
+    "@type": "WebSite",
+    "name": "CircuitDigest",
+    "url": "https://circuitdigest.com/"
+  }
+  </script>
+</head>
+  <body class="path-node page-node-type-microcontroller has-glyphicons">
+    <a href="#main-content" class="visually-hidden focusable skip-link">
+      Skip to main content
+    </a>
+    
+    <!-- removed below two scripts becuase its by default included in D9 if any issue in popup please uncomment them -->
+<!--   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script> -->
+	
+<div id="myModalwel" class="modal fade" data-keyboard="false" data-backdrop="static">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header" style="display:none">
+              <div class="blocksss">
+                <div class="modal-title">Continue to site >>></div>
+              </div>
+            </div>
+            <div class="modal-body">
+    <!-- /21034905/components101_welcome_banner -->
+     <div id='div-gpt-ad-1569943024333-0' style='min-width: 640px; min-height: 480px;'>
+      <script type="9ed7aeb7ba36c64b3b7181b0-text/javascript">
+        googletag.cmd.push(function() { googletag.display('div-gpt-ad-1569943024333-0'); });
+      </script>
+    </div> 
+                 <!-- <img src="adsimage.png" class="img-responsive"> -->
+            </div>
+        </div>
+      </div>
+    </div>
+	</div>
+	
+
+
+
+<style type="text/css">
+
+
+</style>
+  <div class="dialog-off-canvas-main-canvas" data-off-canvas-main-canvas>
+              <header class="navbar navbar-default container-fluid" id="navbar" role="banner">
+
+      <div class="row header-top_2">
+          <div class="col-md-4 col-sm-4 logo">  <div class="region region-navigation">
+          <a class="logo navbar-btn pull-left" href="/" title="Home" rel="home">
+      <img src="/sites/default/files/circuitdigest_logo_0.png" alt="Home" width="200" height="54" />
+    </a>
+      
+  </div>
+</div>
+          <div class="col-md-8 col-sm-8">
+            <div class="header-social-icons">
+              <div class="mb-0 pl-0">
+                  <div class="region region-user-menu">
+    <nav role="navigation" aria-labelledby="block-circuitdigest-account-menu-menu" id="block-circuitdigest-account-menu">
+            
+  <span class="visually-hidden" id="block-circuitdigest-account-menu-menu">User account menu</span>
+  
+
+        
+      <ul class="menu menu--account nav navbar-nav navbar-right">
+                      <li class="first last">
+                                        <a href="/user/login" data-drupal-link-system-path="user/login">Log in</a>
+              </li>
+        </ul>
+  
+
+  </nav>
+<div class="search-block-form block block-search block-search-form-block" data-drupal-selector="search-block-form" id="block-circuitdigest-search" role="search">
+  
+    
+      <form action="/search/node" method="get" id="search-block-form" accept-charset="UTF-8">
+  <div class="form-item js-form-item form-type-search js-form-type-search form-item-keys js-form-item-keys form-no-label form-group">
+      <label for="edit-keys" class="control-label sr-only">Search</label>
+  
+  
+  <div class="input-group"><input title="Enter the terms you wish to search for." data-drupal-selector="edit-keys" class="form-search form-control" placeholder="Search" type="search" id="edit-keys" name="keys" value="" size="15" maxlength="128" data-toggle="tooltip" /><span class="input-group-btn"><button type="submit" value="Search" class="button js-form-submit form-submit btn-primary btn icon-only"><span class="sr-only">Search</span><span class="icon glyphicon glyphicon-search" aria-hidden="true"></span></button></span></div>
+
+  
+  
+  </div>
+<div class="form-actions form-group js-form-wrapper form-wrapper" data-drupal-selector="edit-actions" id="edit-actions"></div>
+
+</form>
+
+  </div>
+
+  </div>
+
+                              </div>
+            </div>
+          </div>
+        </div>
+                <nav class="navbar navbar-inverse row">
+
+          
+              <div class="region region-navigation-collapsible">
+    <section id="block-tb-megamenu-menu-block-main" class="block block-tb-megamenu block-tb-megamenu-menu-blockmain clearfix">
+  
+    
+
+      <style type="text/css">
+  .tb-megamenu.animate .mega > .mega-dropdown-menu, .tb-megamenu.animate.slide .mega > .mega-dropdown-menu > div {
+    transition-delay: 200ms;  -webkit-transition-delay: 200ms;  -ms-transition-delay: 200ms;  -o-transition-delay: 200ms;  transition-duration: 400ms;  -webkit-transition-duration: 400ms;  -ms-transition-duration: 400ms;  -o-transition-duration: 400ms;
+  }
+</style>
+<div  class="tb-megamenu tb-megamenu-main style-blue animate fading" data-duration="400" data-delay="200" id="tb-megamenu-main" role="navigation" aria-label="Main navigation">
+      <button data-target=".nav-collapse" data-toggle="collapse" class="btn btn-navbar tb-megamenu-button" type="button" aria-label="Main menu" aria-expanded="false">
+      <i class="fa fa-reorder" aria-hidden="true"></i>
+    </button>
+    <div class="nav-collapse ">
+    <ul  class="tb-megamenu-nav nav level-0 items-7" role="list" >
+        <li  class="tb-megamenu-item level-1 mega dropdown" data-id="menu_link_content:027becfb-f7cb-4951-b96f-bfde4a303e27" data-level="1" data-type="menu_item" data-class="" data-xicon="" data-caption="" data-alignsub="" data-group="0" data-hidewcol="0" data-hidesub="0" data-label="" aria-level="1" >
+      <a href="/news"  class="dropdown-toggle" aria-expanded="false">
+          News
+          <span class="caret"></span>
+          </a>
+  <div  class="tb-megamenu-submenu dropdown-menu mega-dropdown-menu nav-child" data-class="" data-width="" role="list">
+  <div class="mega-dropdown-inner">
+          <div  class="tb-megamenu-row row-fluid">
+      <div  class="tb-megamenu-column span4 mega-col-nav" data-class="" data-width="4" data-hidewcol="0" id="tb-megamenu-column-1">
+  <div class="tb-megamenu-column-inner mega-inner clearfix">
+               <ul  class="tb-megamenu-subnav mega-nav level-1 items-3" role="list">
+        <li  class="tb-megamenu-item level-2 mega" data-id="menu_link_content:23580731-f357-47aa-9d9d-1c0a5e0b637e" data-level="2" data-type="menu_item" data-class="" data-xicon="" data-caption="" data-alignsub="" data-group="1" data-hidewcol="0" data-hidesub="0" data-label="" aria-level="2" >
+      <a href="/new-electronics-components" >
+          New Products
+          </a>
+  
+</li>
+
+        <li  class="tb-megamenu-item level-2 mega" data-id="menu_link_content:24d173ef-4560-47d1-8359-e04f143c0fd0" data-level="2" data-type="menu_item" data-class="" data-xicon="" data-caption="" data-alignsub="" data-group="1" data-hidewcol="0" data-hidesub="0" data-label="" aria-level="2" >
+      <a href="/industry-news" >
+          Industry News
+          </a>
+  
+</li>
+
+        <li  class="tb-megamenu-item level-2 mega" data-id="menu_link_content:152f5092-ecf7-4a9b-9181-3e052220419c" data-level="2" data-type="menu_item" data-class="" data-xicon="" data-caption="" data-alignsub="" data-group="1" data-hidewcol="0" data-hidesub="0" data-label="" aria-level="2" >
+      <a href="/community-news" >
+          Community News
+          </a>
+  
+</li>
+
+  </ul>
+
+      </div>
+</div>
+
+      <div  data-showblocktitle="1" class="tb-megamenu-column span8 mega-col-nav featured-news-col" data-class="featured-news-col" data-width="8" data-hidewcol="0" id="tb-megamenu-column-2">
+  <div class="tb-megamenu-column-inner mega-inner clearfix">
+                 <div  class="tb-block tb-megamenu-block" data-type="block" data-block="featurednewsheader">
+    <div class="block-inner">
+      <section id="block-views-blockfront-page-view-block-21" class="block block-views block-views-blockfront-page-view-block-21 clearfix">
+  
+      <div class="block-title">Featured News</div>
+    
+
+      <div class="views-element-container form-group"><div class="view view-front-page-view view-id-front_page_view view-display-id-block_21 js-view-dom-id-a0f0292dd0be4ef0832845ed1d310bab882ec2406721392ba82e33cdd9c2a022">
+  
+    
+      
+      <div class="view-content">
+      
+    <div class="views-view-grid horizontal cols-2 clearfix">
+            <div class="views-row clearfix row-1">
+                  <div class="views-col col-1" style="width: 50%;">
+
+
+
+<div class="views-field views-field-field-image"><div class="field-content">  <a href="/news/m5stack-chain-captain-puts-an-esp32-s3-screen-mic-ir-and-battery-in-one-35-controller" hreflang="en"><img loading="lazy" src="/sites/default/files/styles/medium__550x315_/public/circuitdigest_news_images/m5stack-chain-captain-puts-an-esp32-s3-screen-mic-ir-and-battery-in-one-35-controller.jpg?itok=ATt02EwS" width="750" height="500" alt="M5Stack Chain Captain Handheld Controller With Screen" title="M5Stack Chain Captain Handheld Controller With Screen" class="img-responsive" />
+
+</a>
+</div></div><div class="views-field views-field-field-project-image"><div class="field-content"></div></div><div class="views-field views-field-title"><div class="field-content startups-news-high"><time datetime="2026-11-23T05:32:41+05:30">November 23, 2026</time>
+ <br />
+<a href="/news/m5stack-chain-captain-puts-an-esp32-s3-screen-mic-ir-and-battery-in-one-35-controller" hreflang="en">M5Stack Chain Captain Puts an ESP32-S3, Screen, Mic, IR and Battery in One $35 Controller</a></div></div>
+</div>
+                  <div class="views-col col-2" style="width: 50%;">
+
+
+
+<div class="views-field views-field-field-image"><div class="field-content">  <a href="/news/meshtastic-vs-meshcore-explained-why-one-floods-every-message-and-the-other-learns-a-path" hreflang="en"><img loading="lazy" src="/sites/default/files/styles/medium__550x315_/public/circuitdigest_news_images/meshtastic-vs-meshcore-explained-why-one-floods-every-message-and-the-other-learns-a-path.jpg?itok=qKa40yYv" width="750" height="500" alt="HackerGadgets 4-in-1 Raspberry Pi HAT Board" title="HackerGadgets 4-in-1 Raspberry Pi HAT Board" class="img-responsive" />
+
+</a>
+</div></div><div class="views-field views-field-field-project-image"><div class="field-content"></div></div><div class="views-field views-field-title"><div class="field-content startups-news-high"><time datetime="2026-11-23T05:29:28+05:30">November 23, 2026</time>
+ <br />
+<a href="/news/meshtastic-vs-meshcore-explained-why-one-floods-every-message-and-the-other-learns-a-path" hreflang="en">Meshtastic vs MeshCore Explained: Why One Floods Every Message and the Other Learns a Path</a></div></div>
+</div>
+              </div>
+          <div class="views-row clearfix row-2">
+                  <div class="views-col col-1" style="width: 50%;">
+
+
+
+<div class="views-field views-field-field-image"><div class="field-content">  <a href="/news/old-echo-dot-becomes-a-local-home-assistant-speaker-after-a-50-board-swap-with-two-esp32s" hreflang="en"><img loading="lazy" src="/sites/default/files/styles/medium__550x315_/public/circuitdigest_news_images/old-echo-dot-becomes-a-local-home-assistant-speaker-after-a-50-board-swap-with-two-esp32s.jpg?itok=Z4QfTmFW" width="750" height="500" alt="AAElectronics LocalDot Board For Home Assistant Speaker" title="AAElectronics LocalDot Board For Home Assistant Speaker" class="img-responsive" />
+
+</a>
+</div></div><div class="views-field views-field-field-project-image"><div class="field-content"></div></div><div class="views-field views-field-title"><div class="field-content startups-news-high"><time datetime="2026-11-23T05:28:34+05:30">November 23, 2026</time>
+ <br />
+<a href="/news/old-echo-dot-becomes-a-local-home-assistant-speaker-after-a-50-board-swap-with-two-esp32s" hreflang="en">Old Echo Dot Becomes a Local Home Assistant Speaker After a $50 Board Swap With Two ESP32s</a></div></div>
+</div>
+                  <div class="views-col col-2" style="width: 50%;">
+
+
+
+<div class="views-field views-field-field-image"><div class="field-content">  <a href="/news/20-cent-usb-graphics-card-where-a-13-cent-risc-v-chip-puts-pc-text-on-an-old-analog-tv" hreflang="en"><img loading="lazy" src="/sites/default/files/styles/medium__550x315_/public/circuitdigest_news_images/20-cent-usb-graphics-card-where-a-13-cent-risc-v-chip-puts-pc-text-on-an-old-analog-tv.jpg?itok=qOAyYJen" width="750" height="500" alt="Bitluni&#039;s 20-Cent USB Graphics Card Project" title="Bitluni&#039;s 20-Cent USB Graphics Card Project" class="img-responsive" />
+
+</a>
+</div></div><div class="views-field views-field-field-project-image"><div class="field-content"></div></div><div class="views-field views-field-title"><div class="field-content startups-news-high"><time datetime="2026-11-23T05:27:51+05:30">November 23, 2026</time>
+ <br />
+<a href="/news/20-cent-usb-graphics-card-where-a-13-cent-risc-v-chip-puts-pc-text-on-an-old-analog-tv" hreflang="en">20-Cent USB Graphics Card Where a 13-Cent RISC-V Chip Puts PC Text on an Old Analog TV</a></div></div>
+</div>
+              </div>
+          <div class="views-row clearfix row-3">
+                  <div class="views-col col-1" style="width: 50%;">
+
+
+
+<div class="views-field views-field-field-image"><div class="field-content">  <a href="/news/maker-builds-a-300-robot-hand-with-18-motors-that-pull-steel-tendons-like-real-muscles" hreflang="en"><img loading="lazy" src="/sites/default/files/styles/medium__550x315_/public/circuitdigest_news_images/maker-builds-a-300-robot-hand-with-18-motors-that-pull-steel-tendons-like-real-muscles.jpg?itok=Oe6gsLdB" width="750" height="500" alt="Mahdi Designs M1 Robot Hand Build Video" title="Mahdi Designs M1 Robot Hand Build Video" class="img-responsive" />
+
+</a>
+</div></div><div class="views-field views-field-field-project-image"><div class="field-content"></div></div><div class="views-field views-field-title"><div class="field-content startups-news-high"><time datetime="2026-11-23T05:27:02+05:30">November 23, 2026</time>
+ <br />
+<a href="/news/maker-builds-a-300-robot-hand-with-18-motors-that-pull-steel-tendons-like-real-muscles" hreflang="en">Maker Builds a $300 Robot Hand With 18 Motors That Pull Steel Tendons Like Real Muscles</a></div></div>
+</div>
+                  <div class="views-col col-2" style="width: 50%;">
+
+
+
+<div class="views-field views-field-field-image"><div class="field-content">  <a href="/news/auction-rc-flail-mower-becomes-a-robot-that-mows-by-itself-using-a-drone-flight-controller" hreflang="en"><img loading="lazy" src="/sites/default/files/styles/medium__550x315_/public/circuitdigest_news_images/auction-rc-flail-mower-becomes-a-robot-that-mows-by-itself-using-a-drone-flight-controller.jpg?itok=VpO4HPaL" width="750" height="500" alt="Autonomous RC Flail Mower Cutting Grass Field" title="Autonomous RC Flail Mower Cutting Grass Field" class="img-responsive" />
+
+</a>
+</div></div><div class="views-field views-field-field-project-image"><div class="field-content"></div></div><div class="views-field views-field-title"><div class="field-content startups-news-high"><time datetime="2026-11-20T05:34:07+05:30">November 20, 2026</time>
+ <br />
+<a href="/news/auction-rc-flail-mower-becomes-a-robot-that-mows-by-itself-using-a-drone-flight-controller" hreflang="en">Auction RC Flail Mower Becomes a Robot That Mows by Itself Using a Drone Flight Controller</a></div></div>
+</div>
+              </div>
+      </div>
+
+    </div>
+  
+          </div>
+</div>
+
+  </section>
+
+    </div>
+  </div>
+
+      </div>
+</div>
+
+  </div>
+
+      </div>
+</div>
+
+</li>
+
+        <li  class="tb-megamenu-item level-1 mega dropdown" data-id="menu_link_content:5ddd429d-d1db-433d-a744-8f2dbf4645ec" data-level="1" data-type="menu_item" data-class="" data-xicon="" data-caption="" data-alignsub="" data-group="0" data-hidewcol="0" data-hidesub="0" data-label="" aria-level="1" >
+      <a href="/articles"  class="dropdown-toggle" aria-expanded="false">
+          Articles
+          <span class="caret"></span>
+          </a>
+  <div  class="tb-megamenu-submenu dropdown-menu mega-dropdown-menu nav-child" data-class="" data-width="" role="list">
+  <div class="mega-dropdown-inner">
+          <div  class="tb-megamenu-row row-fluid">
+      <div  class="tb-megamenu-column span4 mega-col-nav" data-class="" data-width="4" data-hidewcol="0" id="tb-megamenu-column-3">
+  <div class="tb-megamenu-column-inner mega-inner clearfix">
+               <ul  class="tb-megamenu-subnav mega-nav level-1 items-5" role="list">
+        <li  class="tb-megamenu-item level-2 mega" data-id="menu_link_content:a538fac2-bb0a-445b-8022-22326bc2897f" data-level="2" data-type="menu_item" data-class="" data-xicon="" data-caption="" data-alignsub="" data-group="1" data-hidewcol="0" data-hidesub="0" data-label="" aria-level="2" >
+      <a href="/product-reviews" >
+          Product Reviews
+          </a>
+  
+</li>
+
+        <li  class="tb-megamenu-item level-2 mega" data-id="menu_link_content:30426154-166f-449e-b51b-240fabb24794" data-level="2" data-type="menu_item" data-class="" data-xicon="" data-caption="" data-alignsub="" data-group="1" data-hidewcol="0" data-hidesub="0" data-label="" aria-level="2" >
+      <a href="/tech-articles" >
+          Tech Articles
+          </a>
+  
+</li>
+
+        <li  class="tb-megamenu-item level-2 mega" data-id="menu_link_content:ba549c41-af96-4237-968d-9258917d719e" data-level="2" data-type="menu_item" data-class="" data-xicon="" data-caption="" data-alignsub="" data-group="1" data-hidewcol="0" data-hidesub="0" data-label="" aria-level="2" >
+      <a href="/tutorials" >
+          Tutorials
+          </a>
+  
+</li>
+
+        <li  class="tb-megamenu-item level-2 mega" data-id="menu_link_content:e9c34d67-d262-4ae3-b266-4e7e83f96bdd" data-level="2" data-type="menu_item" data-class="" data-xicon="" data-caption="" data-alignsub="" data-group="1" data-hidewcol="0" data-hidesub="0" data-label="" aria-level="2" >
+      <a href="/interviews" >
+          Interviews
+          </a>
+  
+</li>
+
+        <li  class="tb-megamenu-item level-2 mega" data-id="menu_link_content:245303db-06c4-4dcd-90eb-7dbf000f4c35" data-level="2" data-type="menu_item" data-class="" data-xicon="" data-caption="" data-alignsub="" data-group="1" data-hidewcol="0" data-hidesub="0" data-label="" aria-level="2" >
+      <a href="/case-studies" >
+          Case Studies
+          </a>
+  
+</li>
+
+  </ul>
+
+      </div>
+</div>
+
+      <div  data-showblocktitle="1" class="tb-megamenu-column span8 mega-col-nav featured-articles-col" data-class="featured-articles-col" data-width="8" data-hidewcol="0" id="tb-megamenu-column-4">
+  <div class="tb-megamenu-column-inner mega-inner clearfix">
+                 <div  class="tb-block tb-megamenu-block" data-type="block" data-block="featuredarticlesheader">
+    <div class="block-inner">
+      <section id="block-views-blockfront-page-view-block-23" class="block block-views block-views-blockfront-page-view-block-23 clearfix">
+  
+      <div class="block-title">Featured Articles</div>
+    
+
+      <div class="views-element-container form-group"><div class="view view-front-page-view view-id-front_page_view view-display-id-block_23 js-view-dom-id-4a81f581c79a66a8c747ad4b321847861a0b5c5789d95b07a008c0c80937ee42">
+  
+    
+      
+      <div class="view-content">
+      
+    <div class="views-view-grid horizontal cols-2 clearfix">
+            <div class="views-row clearfix row-1">
+                  <div class="views-col col-1" style="width: 50%;">
+
+
+
+<div class="views-field views-field-field-image"><div class="field-content">  <a href="/articles/final-year-ece-and-eee-projects" hreflang="en"><img loading="lazy" src="/sites/default/files/styles/medium__550x315_/public/field/image/Final-Year-ECE-and-EEE-Project.jpeg?itok=rPjsE4_p" width="750" height="500" alt=" Final Year ECE/EEE Project Ideas " title=" Final Year ECE/EEE Project Ideas " class="img-responsive" />
+
+</a>
+</div></div><div class="views-field views-field-field-project-image"><div class="field-content"></div></div><div class="views-field views-field-title"><div class="field-content startups-news-high"><time datetime="2026-11-16T19:12:43+05:30">November 16, 2026</time>
+ <br />
+<a href="/articles/final-year-ece-and-eee-projects" hreflang="en">Top 80+ Final Year ECE/EEE Project Ideas You Can Build in 2026</a></div></div>
+</div>
+                  <div class="views-col col-2" style="width: 50%;">
+
+
+
+<div class="views-field views-field-field-image"><div class="field-content">  <a href="/articles/rohm-components-power-a-smart-electric-three-wheeler" hreflang="en"><img loading="lazy" src="/sites/default/files/styles/medium__550x315_/public/field/image/ROHM-Semiconductor-Solutions-for-Electric-Mobility.jpg?itok=h3Jei0GM" width="750" height="500" alt="ROHM Semiconductor Solutions for Electric Mobility" title="ROHM Semiconductor Solutions for Electric Mobility" class="img-responsive" />
+
+</a>
+</div></div><div class="views-field views-field-field-project-image"><div class="field-content"></div></div><div class="views-field views-field-title"><div class="field-content startups-news-high"><time datetime="2026-11-02T17:55:57+05:30">November 2, 2026</time>
+ <br />
+<a href="/articles/rohm-components-power-a-smart-electric-three-wheeler" hreflang="en">How ROHM Components Power a Smart Electric Three-Wheeler</a></div></div>
+</div>
+              </div>
+          <div class="views-row clearfix row-2">
+                  <div class="views-col col-1" style="width: 50%;">
+
+
+
+<div class="views-field views-field-field-image"><div class="field-content">  <a href="/articles/inside-stmicroelectronic-robotics-and-ai-demos-at-electronica-India-2026" hreflang="en"><img loading="lazy" src="/sites/default/files/styles/medium__550x315_/public/field/image/AI-Powered-Robotic-Hand.jpg?itok=G7dkjlDh" width="750" height="500" alt="AI Powered Robotic Hand" title="AI Powered Robotic Hand" class="img-responsive" />
+
+</a>
+</div></div><div class="views-field views-field-field-project-image"><div class="field-content"></div></div><div class="views-field views-field-title"><div class="field-content startups-news-high"><time datetime="2026-10-27T17:51:31+05:30">October 27, 2026</time>
+ <br />
+<a href="/articles/inside-stmicroelectronic-robotics-and-ai-demos-at-electronica-India-2026" hreflang="en">Inside STMicroelectronic&#039;s Robotics and AI Demos at electronica India 2026</a></div></div>
+</div>
+                  <div class="views-col col-2" style="width: 50%;">
+
+
+
+<div class="views-field views-field-field-image"><div class="field-content">  <a href="/articles/qorvos-qpa9510-a-power-amplifier-supporting-gsm-uhf-and-fm-bands" hreflang="en"><img loading="lazy" src="/sites/default/files/styles/medium__550x315_/public/field/image/Qorvo-QPA9510-Mouser-Rapid-Review_0.png?itok=pFrL2-3b" width="750" height="500" alt="Multi-Band GaAs Amplifier Covers Sub-1GHz Applications" title="Multi-Band GaAs Amplifier Covers Sub-1GHz Applications" class="img-responsive" />
+
+</a>
+</div></div><div class="views-field views-field-field-project-image"><div class="field-content"></div></div><div class="views-field views-field-title"><div class="field-content startups-news-high"><time datetime="2026-09-25T15:10:55+05:30">September 25, 2026</time>
+ <br />
+<a href="/articles/qorvos-qpa9510-a-power-amplifier-supporting-gsm-uhf-and-fm-bands" hreflang="en">Qorvo&#039;s QPA9510, A Power Amplifier Supporting GSM, UHF, and FM Bands</a></div></div>
+</div>
+              </div>
+          <div class="views-row clearfix row-3">
+                  <div class="views-col col-1" style="width: 50%;">
+
+
+
+<div class="views-field views-field-field-image"><div class="field-content">  <a href="/articles/running-260K-tiny-llm-on-esp32" hreflang="en"><img loading="lazy" src="/sites/default/files/styles/medium__550x315_/public/field/image/ESP32-Boards-Comparison.jpg?itok=m8wtH3rU" width="750" height="500" alt="ESP32 Boards Comparison" title="ESP32 Boards Comparison" class="img-responsive" />
+
+</a>
+</div></div><div class="views-field views-field-field-project-image"><div class="field-content"></div></div><div class="views-field views-field-title"><div class="field-content startups-news-high"><time datetime="2026-09-23T19:37:33+05:30">September 23, 2026</time>
+ <br />
+<a href="/articles/running-260K-tiny-llm-on-esp32" hreflang="en">Running 260K Tiny-LLM on ESP32</a></div></div>
+</div>
+                  <div class="views-col col-2" style="width: 50%;">
+
+
+
+<div class="views-field views-field-field-image"><div class="field-content">  <a href="/articles/ros2-practical-roadmap-for-robotics-engineers" hreflang="en"><img loading="lazy" src="/sites/default/files/styles/medium__550x315_/public/field/image/Practical-Roadmap-for-%20Robotics-Engineers.jpeg?itok=CkQjdV_F" width="750" height="500" alt=" ROS 2 Practical Roadmap for Robotics Engineers" title=" ROS 2 Practical Roadmap for Robotics Engineers" class="img-responsive" />
+
+</a>
+</div></div><div class="views-field views-field-field-project-image"><div class="field-content"></div></div><div class="views-field views-field-title"><div class="field-content startups-news-high"><time datetime="2026-09-21T18:49:24+05:30">September 21, 2026</time>
+ <br />
+<a href="/articles/ros2-practical-roadmap-for-robotics-engineers" hreflang="en">How to Learn ROS 2: A Practical Roadmap for Robotics Engineers</a></div></div>
+</div>
+              </div>
+      </div>
+
+    </div>
+  
+          </div>
+</div>
+
+  </section>
+
+    </div>
+  </div>
+
+      </div>
+</div>
+
+  </div>
+
+      </div>
+</div>
+
+</li>
+
+            <li  class="tb-megamenu-item level-1 mega digikeycss mega-align-center dropdown" data-id="menu_link_content:a83e8e17-9c22-45c4-9ff7-e04526094a7a" data-level="1" data-type="menu_item" data-class="digikeycss" data-xicon="" data-caption="" data-alignsub="center" data-group="0" data-hidewcol="0" data-hidesub="0" data-label="" aria-level="1" >
+      <span class="dropdown-toggle tb-megamenu-no-link" aria-expanded="false" tabindex="0">
+          DigiKey Store
+          <span class="caret"></span>
+          </span>
+  <div  class="tb-megamenu-submenu digikeycss1 dropdown-menu mega-dropdown-menu nav-child" data-class="digikeycss1" data-width="700" style="width: 700px;" role="list">
+  <div class="mega-dropdown-inner">
+          <div  class="tb-megamenu-row row-fluid">
+      <div  class="tb-megamenu-column span3 mega-col-nav" data-class="" data-width="3" data-hidewcol="0" id="tb-megamenu-column-5">
+  <div class="tb-megamenu-column-inner mega-inner clearfix">
+               <ul  class="tb-megamenu-subnav mega-nav level-1 items-4" role="list">
+        <li  class="tb-megamenu-item level-2 mega" data-id="menu_link_content:1619dbfa-b318-4c9f-9f4c-734709b4807a" data-level="2" data-type="menu_item" data-class="" data-xicon="" data-caption="" data-alignsub="" data-group="1" data-hidewcol="0" data-hidesub="0" data-label="" aria-level="2" >
+      <a href="https://bit.ly/3y7lgM0"  target="_blank" rel="nofollow">
+          Cables and Wires
+          </a>
+  
+</li>
+
+        <li  class="tb-megamenu-item level-2 mega" data-id="menu_link_content:8ceaf5b5-906e-4428-a50a-08cdeb9bcce9" data-level="2" data-type="menu_item" data-class="" data-xicon="" data-caption="" data-alignsub="" data-group="1" data-hidewcol="0" data-hidesub="0" data-label="" aria-level="2" >
+      <a href="https://bit.ly/3yaBR1m"  target="_blank" rel="nofollow">
+          LED/Optoelectronics
+          </a>
+  
+</li>
+
+        <li  class="tb-megamenu-item level-2 mega" data-id="menu_link_content:fe00807b-fd09-4490-bc7a-43889e033b87" data-level="2" data-type="menu_item" data-class="" data-xicon="" data-caption="" data-alignsub="" data-group="1" data-hidewcol="0" data-hidesub="0" data-label="" aria-level="2" >
+      <a href="https://bit.ly/39sXq2V"  target="_blank" rel="nofollow">
+          Connectors and Interconnect
+          </a>
+  
+</li>
+
+        <li  class="tb-megamenu-item level-2 mega" data-id="menu_link_content:f5eb64d3-8599-461b-ad01-71e66d116396" data-level="2" data-type="menu_item" data-class="" data-xicon="" data-caption="" data-alignsub="" data-group="1" data-hidewcol="0" data-hidesub="0" data-label="" aria-level="2" >
+      <a href="https://bit.ly/3s4uqFh"  target="_blank" rel="nofollow">
+          Discrete
+          </a>
+  
+</li>
+
+  </ul>
+
+      </div>
+</div>
+
+      <div  class="tb-megamenu-column span3 mega-col-nav" data-class="" data-width="3" data-hidewcol="" id="tb-megamenu-column-6">
+  <div class="tb-megamenu-column-inner mega-inner clearfix">
+               <ul  class="tb-megamenu-subnav mega-nav level-1 items-4" role="list">
+        <li  class="tb-megamenu-item level-2 mega" data-id="menu_link_content:ef3822c9-d5c4-4e03-b4d6-86bb836db314" data-level="2" data-type="menu_item" data-class="" data-xicon="" data-caption="" data-alignsub="" data-group="1" data-hidewcol="0" data-hidesub="0" data-label="" aria-level="2" >
+      <a href="https://bit.ly/3saepNU"  target="_blank" rel="nofollow">
+          Electromechanical
+          </a>
+  
+</li>
+
+        <li  class="tb-megamenu-item level-2 mega" data-id="menu_link_content:901e0859-9780-4897-b617-53b5253b0129" data-level="2" data-type="menu_item" data-class="" data-xicon="" data-caption="" data-alignsub="" data-group="1" data-hidewcol="0" data-hidesub="0" data-label="" aria-level="2" >
+      <a href="https://bit.ly/3MJrS7m"  target="_blank" rel="nofollow">
+          Integrated Circuits (ICs)
+          </a>
+  
+</li>
+
+        <li  class="tb-megamenu-item level-2 mega" data-id="menu_link_content:44db3125-9f49-4373-b5c8-b978c24b78b7" data-level="2" data-type="menu_item" data-class="" data-xicon="" data-caption="" data-alignsub="" data-group="1" data-hidewcol="0" data-hidesub="0" data-label="" aria-level="2" >
+      <a href="https://bit.ly/3w362oI"  target="_blank" rel="nofollow">
+          Embedded Computers
+          </a>
+  
+</li>
+
+        <li  class="tb-megamenu-item level-2 mega" data-id="menu_link_content:92a98bdf-afdc-4af8-a2d5-03187bd59b64" data-level="2" data-type="menu_item" data-class="" data-xicon="" data-caption="" data-alignsub="" data-group="1" data-hidewcol="0" data-hidesub="0" data-label="" aria-level="2" >
+      <a href="https://bit.ly/3yby6ZN"  target="_blank" rel="nofollow">
+          Enclosures, Hardware and Office
+          </a>
+  
+</li>
+
+  </ul>
+
+      </div>
+</div>
+
+      <div  class="tb-megamenu-column span3 mega-col-nav" data-class="" data-width="3" data-hidewcol="" id="tb-megamenu-column-7">
+  <div class="tb-megamenu-column-inner mega-inner clearfix">
+               <ul  class="tb-megamenu-subnav mega-nav level-1 items-5" role="list">
+        <li  class="tb-megamenu-item level-2 mega" data-id="menu_link_content:e5941132-7863-4028-a3d1-47f62e8eb848" data-level="2" data-type="menu_item" data-class="" data-xicon="" data-caption="" data-alignsub="" data-group="1" data-hidewcol="0" data-hidesub="0" data-label="" aria-level="2" >
+      <a href="https://bit.ly/38LXQB0"  target="_blank" rel="nofollow">
+          Isolators
+          </a>
+  
+</li>
+
+        <li  class="tb-megamenu-item level-2 mega" data-id="menu_link_content:1ff6f476-9d98-4fc2-8aa7-5cc40d8067eb" data-level="2" data-type="menu_item" data-class="" data-xicon="" data-caption="" data-alignsub="" data-group="1" data-hidewcol="0" data-hidesub="0" data-label="" aria-level="2" >
+      <a href="https://bit.ly/3MOHgzq"  target="_blank" rel="nofollow">
+          RF and Wireless
+          </a>
+  
+</li>
+
+        <li  class="tb-megamenu-item level-2 mega" data-id="menu_link_content:5cb1e4fb-35a2-4209-8109-287304ce7a3b" data-level="2" data-type="menu_item" data-class="" data-xicon="" data-caption="" data-alignsub="" data-group="1" data-hidewcol="0" data-hidesub="0" data-label="" aria-level="2" >
+      <a href="https://bit.ly/3yiw6yC"  target="_blank" rel="nofollow">
+          Power and Circuit Protection
+          </a>
+  
+</li>
+
+        <li  class="tb-megamenu-item level-2 mega" data-id="menu_link_content:e03b0421-e01f-4377-b562-4aac3e178397" data-level="2" data-type="menu_item" data-class="" data-xicon="" data-caption="" data-alignsub="" data-group="1" data-hidewcol="0" data-hidesub="0" data-label="" aria-level="2" >
+      <a href="https://bit.ly/3OSDkiW"  target="_blank" rel="nofollow">
+          Programmers
+          </a>
+  
+</li>
+
+        <li  class="tb-megamenu-item level-2 mega" data-id="menu_link_content:c0271f9f-e1ba-499e-8e08-05e63cb80da6" data-level="2" data-type="menu_item" data-class="" data-xicon="" data-caption="" data-alignsub="" data-group="1" data-hidewcol="0" data-hidesub="0" data-label="" aria-level="2" >
+      <a href="https://bit.ly/3ORkMQ7"  target="_blank" rel="nofollow">
+          Passives
+          </a>
+  
+</li>
+
+  </ul>
+
+      </div>
+</div>
+
+      <div  class="tb-megamenu-column span3 mega-col-nav" data-class="" data-width="3" data-hidewcol="" id="tb-megamenu-column-8">
+  <div class="tb-megamenu-column-inner mega-inner clearfix">
+               <ul  class="tb-megamenu-subnav mega-nav level-1 items-4" role="list">
+        <li  class="tb-megamenu-item level-2 mega" data-id="menu_link_content:7e5e5d5c-1d76-46e6-8eef-2a56d5bdd709" data-level="2" data-type="menu_item" data-class="" data-xicon="" data-caption="" data-alignsub="" data-group="1" data-hidewcol="0" data-hidesub="0" data-label="" aria-level="2" >
+      <a href="https://bit.ly/3LJCcvS"  target="_blank" rel="nofollow">
+          Sensors and Transducers
+          </a>
+  
+</li>
+
+        <li  class="tb-megamenu-item level-2 mega" data-id="menu_link_content:8ab47d07-6d9a-4ec0-acb3-1ab44ad102ef" data-level="2" data-type="menu_item" data-class="" data-xicon="" data-caption="" data-alignsub="" data-group="1" data-hidewcol="0" data-hidesub="0" data-label="" aria-level="2" >
+      <a href="https://bit.ly/3LFRoKJ"  target="_blank" rel="nofollow">
+          Semiconductors 
+          </a>
+  
+</li>
+
+        <li  class="tb-megamenu-item level-2 mega" data-id="menu_link_content:32a51290-a356-4942-8196-0c2b211939bc" data-level="2" data-type="menu_item" data-class="" data-xicon="" data-caption="" data-alignsub="" data-group="1" data-hidewcol="0" data-hidesub="0" data-label="" aria-level="2" >
+      <a href="https://bit.ly/3vFY85q"  target="_blank" rel="nofollow">
+          Test Products
+          </a>
+  
+</li>
+
+        <li  class="tb-megamenu-item level-2 mega" data-id="menu_link_content:68d4a7b5-da4c-4637-822b-92fdfeb10707" data-level="2" data-type="menu_item" data-class="" data-xicon="" data-caption="" data-alignsub="" data-group="1" data-hidewcol="0" data-hidesub="0" data-label="" aria-level="2" >
+      <a href="https://bit.ly/3P5ohTc"  target="_blank" rel="nofollow">
+          Tools
+          </a>
+  
+</li>
+
+  </ul>
+
+      </div>
+</div>
+
+  </div>
+
+      </div>
+</div>
+
+</li>
+
+        <li  class="tb-megamenu-item level-1 mega mega-align-center dropdown" data-id="menu_link_content:3ac9a787-9c81-4d3d-b457-75034b321034" data-level="1" data-type="menu_item" data-class="" data-xicon="" data-caption="" data-alignsub="center" data-group="0" data-hidewcol="0" data-hidesub="0" data-label="" aria-level="1" >
+      <a href="/electronics-projects"  class="dropdown-toggle" aria-expanded="false">
+          Projects
+          <span class="caret"></span>
+          </a>
+  <div  class="tb-megamenu-submenu cd-projects-panel dropdown-menu mega-dropdown-menu nav-child" data-class="cd-projects-panel" data-width="" role="list">
+  <div class="mega-dropdown-inner">
+          <div  class="tb-megamenu-row row-fluid">
+      <div  class="tb-megamenu-column span3 mega-col-nav cd-pcol cd-pcol--mcu" data-class="cd-pcol cd-pcol--mcu" data-width="3" data-hidewcol="" id="tb-megamenu-column-9">
+  <div class="tb-megamenu-column-inner mega-inner clearfix">
+               <ul  class="tb-megamenu-subnav mega-nav level-1 items-6" role="list">
+        <li  class="tb-megamenu-item level-2 mega" data-id="menu_link_content:a212b2e2-5322-4cdf-b7cc-0d5510058d75" data-level="2" data-type="menu_item" data-class="" data-xicon="fa fa-microchip" data-caption="" data-alignsub="" data-group="1" data-hidewcol="0" data-hidesub="0" data-label="" aria-level="2" >
+      <a href="/arduino-projects" >
+            <i class="fa fa-microchip"></i>
+        Arduino Projects
+          </a>
+  
+</li>
+
+        <li  class="tb-megamenu-item level-2 mega" data-id="menu_link_content:357bec41-9953-4c2e-a2a4-fa6c30a97103" data-level="2" data-type="menu_item" data-class="" data-xicon="fa fa-wifi" data-caption="" data-alignsub="" data-group="1" data-hidewcol="0" data-hidesub="0" data-label="" aria-level="2" >
+      <a href="/esp32-projects" >
+            <i class="fa fa-wifi"></i>
+        ESP32 Projects
+          </a>
+  
+</li>
+
+        <li  class="tb-megamenu-item level-2 mega" data-id="menu_link_content:d986855d-9259-4fed-9b66-8d34ffbe7745" data-level="2" data-type="menu_item" data-class="" data-xicon="fa fa-camera" data-caption="" data-alignsub="" data-group="1" data-hidewcol="0" data-hidesub="0" data-label="" aria-level="2" >
+      <a href="/esp32-cam-projects" >
+            <i class="fa fa-camera"></i>
+        ESP32-CAM Projects
+          </a>
+  
+</li>
+
+        <li  class="tb-megamenu-item level-2 mega" data-id="menu_link_content:0045eb25-4fa2-4bd5-a4c1-af8221fa2712" data-level="2" data-type="menu_item" data-class="" data-xicon="fa fa-microchip" data-caption="" data-alignsub="" data-group="1" data-hidewcol="0" data-hidesub="0" data-label="" aria-level="2" >
+      <a href="/simple-raspberry-pi-projects-for-beginners" >
+            <i class="fa fa-microchip"></i>
+        Raspberry Pi Projects
+          </a>
+  
+</li>
+
+        <li  class="tb-megamenu-item level-2 mega" data-id="menu_link_content:1e49907b-5fd2-4afe-a73b-5274329812a6" data-level="2" data-type="menu_item" data-class="" data-xicon="fa fa-microchip" data-caption="" data-alignsub="" data-group="1" data-hidewcol="0" data-hidesub="0" data-label="" aria-level="2" >
+      <a href="/stm32-projects-and-tutorials" >
+            <i class="fa fa-microchip"></i>
+        STM32 Projects
+          </a>
+  
+</li>
+
+        <li  class="tb-megamenu-item level-2 mega" data-id="menu_link_content:3a820c33-43dd-4f1f-be18-cf33822ce156" data-level="2" data-type="menu_item" data-class="" data-xicon="fa fa-microchip" data-caption="" data-alignsub="" data-group="1" data-hidewcol="0" data-hidesub="0" data-label="" aria-level="2" >
+      <a href="/microcontroller-projects" >
+            <i class="fa fa-microchip"></i>
+        All Microcontroller Projects
+          </a>
+  
+</li>
+
+  </ul>
+
+      </div>
+</div>
+
+      <div  class="tb-megamenu-column span3 mega-col-nav cd-pcol cd-pcol--smart" data-class="cd-pcol cd-pcol--smart" data-width="3" data-hidewcol="" id="tb-megamenu-column-10">
+  <div class="tb-megamenu-column-inner mega-inner clearfix">
+               <ul  class="tb-megamenu-subnav mega-nav level-1 items-6" role="list">
+        <li  class="tb-megamenu-item level-2 mega" data-id="menu_link_content:c998d13f-368b-40d6-9c03-70af28ba372b" data-level="2" data-type="menu_item" data-class="" data-xicon="fa fa-cogs" data-caption="" data-alignsub="" data-group="1" data-hidewcol="0" data-hidesub="0" data-label="" aria-level="2" >
+      <a href="/robotics-projects" >
+            <i class="fa fa-cogs"></i>
+        Robotics Projects
+          </a>
+  
+</li>
+
+        <li  class="tb-megamenu-item level-2 mega" data-id="menu_link_content:3064ca41-0c72-430d-b868-bcd00fb572d8" data-level="2" data-type="menu_item" data-class="" data-xicon="fa fa-lightbulb-o" data-caption="" data-alignsub="" data-group="1" data-hidewcol="0" data-hidesub="0" data-label="" aria-level="2" >
+      <a href="/ai-projects-and-tutorials" >
+            <i class="fa fa-lightbulb-o"></i>
+        AI Projects
+          </a>
+  
+</li>
+
+        <li  class="tb-megamenu-item level-2 mega" data-id="menu_link_content:3e2f47c4-df40-4623-9ef0-904e3d445bd8" data-level="2" data-type="menu_item" data-class="" data-xicon="fa fa-sitemap" data-caption="" data-alignsub="" data-group="1" data-hidewcol="0" data-hidesub="0" data-label="" aria-level="2" >
+      <a href="/machine-learning-projects" >
+            <i class="fa fa-sitemap"></i>
+        Machine Learning Projects
+          </a>
+  
+</li>
+
+        <li  class="tb-megamenu-item level-2 mega" data-id="menu_link_content:8176b280-1ba1-413f-ac44-a423af628bed" data-level="2" data-type="menu_item" data-class="" data-xicon="fa fa-plane" data-caption="" data-alignsub="" data-group="0" data-hidewcol="0" data-hidesub="0" data-label="" aria-level="2" >
+      <a href="/drone-projects" >
+            <i class="fa fa-plane"></i>
+        Drone Projects
+          </a>
+  
+</li>
+
+        <li  class="tb-megamenu-item level-2 mega" data-id="menu_link_content:36381f3f-125c-4495-8c72-c7d3de66bd5b" data-level="2" data-type="menu_item" data-class="" data-xicon="fa fa-home" data-caption="" data-alignsub="" data-group="1" data-hidewcol="0" data-hidesub="0" data-label="" aria-level="2" >
+      <a href="/home-automation-projects" >
+            <i class="fa fa-home"></i>
+        Home Automation Projects
+          </a>
+  
+</li>
+
+        <li  class="tb-megamenu-item level-2 mega" data-id="menu_link_content:8472eff1-bd34-47ea-a1be-c22a2ce51bab" data-level="2" data-type="menu_item" data-class="" data-xicon="fa fa-cloud" data-caption="" data-alignsub="" data-group="1" data-hidewcol="0" data-hidesub="0" data-label="" aria-level="2" >
+      <a href="/internet-of-things-iot-projects" >
+            <i class="fa fa-cloud"></i>
+        IoT Projects
+          </a>
+  
+</li>
+
+  </ul>
+
+      </div>
+</div>
+
+      <div  class="tb-megamenu-column span3 mega-col-nav cd-pcol cd-pcol--circuits" data-class="cd-pcol cd-pcol--circuits" data-width="3" data-hidewcol="" id="tb-megamenu-column-11">
+  <div class="tb-megamenu-column-inner mega-inner clearfix">
+               <ul  class="tb-megamenu-subnav mega-nav level-1 items-5" role="list">
+        <li  class="tb-megamenu-item level-2 mega" data-id="menu_link_content:5293cf51-1525-4b00-837e-b04be55cd60a" data-level="2" data-type="menu_item" data-class="" data-xicon="fa fa-microchip" data-caption="" data-alignsub="" data-group="1" data-hidewcol="0" data-hidesub="0" data-label="" aria-level="2" >
+      <a href="/vlsi-projects" >
+            <i class="fa fa-microchip"></i>
+        VLSI Projects
+          </a>
+  
+</li>
+
+        <li  class="tb-megamenu-item level-2 mega" data-id="menu_link_content:f2c06383-4e76-4bf6-a376-26a5289273d3" data-level="2" data-type="menu_item" data-class="" data-xicon="fa fa-plug" data-caption="" data-alignsub="" data-group="1" data-hidewcol="0" data-hidesub="0" data-label="" aria-level="2" >
+      <a href="/smps-power-supply-circuits" >
+            <i class="fa fa-plug"></i>
+        Power Supply Circuits
+          </a>
+  
+</li>
+
+        <li  class="tb-megamenu-item level-2 mega" data-id="menu_link_content:4467f8b0-dd29-42b7-b1c6-17e043ea8167" data-level="2" data-type="menu_item" data-class="" data-xicon="fa fa-sliders" data-caption="" data-alignsub="" data-group="1" data-hidewcol="0" data-hidesub="0" data-label="" aria-level="2" >
+      <a href="/op-amp-circuits" >
+            <i class="fa fa-sliders"></i>
+        Op-amp Circuits
+          </a>
+  
+</li>
+
+        <li  class="tb-megamenu-item level-2 mega" data-id="menu_link_content:a2dd4a1d-d8ab-4a86-b7b5-5a7935502474" data-level="2" data-type="menu_item" data-class="" data-xicon="fa fa-clock-o" data-caption="" data-alignsub="" data-group="1" data-hidewcol="0" data-hidesub="0" data-label="" aria-level="2" >
+      <a href="/555-timer-circuits" >
+            <i class="fa fa-clock-o"></i>
+        555 Timer Circuits
+          </a>
+  
+</li>
+
+        <li  class="tb-megamenu-item level-2 mega" data-id="menu_link_content:da44be07-d0c4-498f-a86e-bba06ac3c7a1" data-level="2" data-type="menu_item" data-class="" data-xicon="fa fa-bolt" data-caption="" data-alignsub="" data-group="1" data-hidewcol="0" data-hidesub="0" data-label="" aria-level="2" >
+      <a href="/electronic-circuits" >
+            <i class="fa fa-bolt"></i>
+        All Electronic Circuits
+          </a>
+  
+</li>
+
+  </ul>
+
+      </div>
+</div>
+
+      <div  class="tb-megamenu-column span3 mega-col-nav cd-pcol cd-pcol--more" data-class="cd-pcol cd-pcol--more" data-width="3" data-hidewcol="" id="tb-megamenu-column-12">
+  <div class="tb-megamenu-column-inner mega-inner clearfix">
+               <ul  class="tb-megamenu-subnav mega-nav level-1 items-6" role="list">
+        <li  class="tb-megamenu-item level-2 mega" data-id="menu_link_content:4356ce7f-11c1-4c05-9662-f8c2fed68e3b" data-level="2" data-type="menu_item" data-class="" data-xicon="fa fa-th-large" data-caption="" data-alignsub="" data-group="1" data-hidewcol="0" data-hidesub="0" data-label="" aria-level="2" >
+      <a href="/diy-pcb-projects" >
+            <i class="fa fa-th-large"></i>
+        PCB Projects
+          </a>
+  
+</li>
+
+        <li  class="tb-megamenu-item level-2 mega" data-id="menu_link_content:e74c957b-9327-428b-a343-ac21070ab208" data-level="2" data-type="menu_item" data-class="" data-xicon="fa fa-car" data-caption="" data-alignsub="" data-group="1" data-hidewcol="0" data-hidesub="0" data-label="" aria-level="2" >
+      <a href="/electric-vehicles-ev-projects" >
+            <i class="fa fa-car"></i>
+        EV Projects
+          </a>
+  
+</li>
+
+        <li  class="tb-megamenu-item level-2 mega" data-id="menu_link_content:3591ac1d-fb93-48cb-8e8e-35fbe4f5886a" data-level="2" data-type="menu_item" data-class="" data-xicon="fa fa-volume-up" data-caption="" data-alignsub="" data-group="1" data-hidewcol="0" data-hidesub="0" data-label="" aria-level="2" >
+      <a href="/audio-circuits" >
+            <i class="fa fa-volume-up"></i>
+        Audio Circuits
+          </a>
+  
+</li>
+
+        <li  class="tb-megamenu-item level-2 mega" data-id="menu_link_content:ad759a2c-9568-4a08-a694-d89289f134d7" data-level="2" data-type="menu_item" data-class="" data-xicon="fa fa-microchip" data-caption="" data-alignsub="" data-group="1" data-hidewcol="0" data-hidesub="0" data-label="" aria-level="2" >
+      <a href="/raspberry-pi-pico-projects-and-tutorials" >
+            <i class="fa fa-microchip"></i>
+        Raspberry Pi Pico Projects
+          </a>
+  
+</li>
+
+        <li  class="tb-megamenu-item level-2 mega" data-id="menu_link_content:df2889dc-bb78-40a9-9726-bee55df0d706" data-level="2" data-type="menu_item" data-class="" data-xicon="fa fa-wifi" data-caption="" data-alignsub="" data-group="1" data-hidewcol="0" data-hidesub="0" data-label="" aria-level="2" >
+      <a href="/esp8266-projects" >
+            <i class="fa fa-wifi"></i>
+        ESP8266 Projects
+          </a>
+  
+</li>
+
+        <li  class="tb-megamenu-item level-2 mega" data-id="menu_link_content:0cfccf2b-553c-4ad7-868d-049289bf7bd8" data-level="2" data-type="menu_item" data-class="" data-xicon="fa fa-microchip" data-caption="" data-alignsub="" data-group="1" data-hidewcol="0" data-hidesub="0" data-label="" aria-level="2" >
+      <a href="/pic-microcontroller-projects" >
+            <i class="fa fa-microchip"></i>
+        PIC Projects
+          </a>
+  
+</li>
+
+  </ul>
+
+      </div>
+</div>
+
+  </div>
+
+          <div  class="tb-megamenu-row row-fluid">
+      <div  class="tb-megamenu-column span12 mega-col-nav cd-pcol-all" data-class="cd-pcol-all" data-width="12" data-hidewcol="" id="tb-megamenu-column-13">
+  <div class="tb-megamenu-column-inner mega-inner clearfix">
+               <ul  class="tb-megamenu-subnav mega-nav level-1 items-2" role="list">
+        <li  class="tb-megamenu-item level-2 mega" data-id="menu_link_content:dc42cba9-7509-48e0-837f-1e85a55bac93" data-level="2" data-type="menu_item" data-class="" data-xicon="fa fa-cloud" data-caption="" data-alignsub="" data-group="1" data-hidewcol="0" data-hidesub="0" data-label="" aria-level="2" >
+      <a href="/tags/circuitdigest-cloud" >
+            <i class="fa fa-cloud"></i>
+        CircuitDigest Cloud Projects
+          </a>
+  
+</li>
+
+        <li  class="tb-megamenu-item level-2 mega" data-id="menu_link_content:8673c559-fd3a-4bcd-958c-36f1aea3f5ae" data-level="2" data-type="menu_item" data-class="" data-xicon="fa fa-list" data-caption="" data-alignsub="" data-group="0" data-hidewcol="0" data-hidesub="0" data-label="" aria-level="2" >
+      <a href="/electronics-projects" >
+            <i class="fa fa-list"></i>
+        All Electronics Projects
+          </a>
+  
+</li>
+
+  </ul>
+
+      </div>
+</div>
+
+  </div>
+
+      </div>
+</div>
+
+</li>
+
+        <li  class="tb-megamenu-item level-1 mega cd-mtag cd-mtag--new dropdown" data-id="menu_link_content:b68a244f-1cf5-478d-ac65-b434f550c340" data-level="1" data-type="menu_item" data-class="cd-mtag cd-mtag--new" data-xicon="" data-caption="New" data-alignsub="" data-group="0" data-hidewcol="0" data-hidesub="0" data-label="" aria-level="1" >
+      <a href="/contests"  class="dropdown-toggle" aria-expanded="false">
+          Contests
+          <span class="caret"></span>
+              <span class="mega-caption">New</span>
+      </a>
+  <div  class="tb-megamenu-submenu cd-contests-panel dropdown-menu mega-dropdown-menu nav-child" data-class="cd-contests-panel" data-width="" role="list">
+  <div class="mega-dropdown-inner">
+          <div  class="tb-megamenu-row row-fluid">
+      <div  class="tb-megamenu-column span12 mega-col-nav" data-class="" data-width="12" data-hidewcol="0" id="tb-megamenu-column-13">
+  <div class="tb-megamenu-column-inner mega-inner clearfix">
+               <ul  class="tb-megamenu-subnav mega-nav level-1 items-5" role="list">
+        <li  class="tb-megamenu-item level-2 mega cd-mtag cd-mtag--open" data-id="menu_link_content:dbd7a79f-dedf-4f8e-b8f1-1aec8bc5aed9" data-level="2" data-type="menu_item" data-class="cd-mtag cd-mtag--open" data-xicon="" data-caption="Open" data-alignsub="" data-group="1" data-hidewcol="0" data-hidesub="0" data-label="" aria-level="2" >
+      <a href="/contest/iot-ai-inference-design-challenge-2026/" >
+          IoT &amp; AI Inference Design Challenge 2026
+              <span class="mega-caption">Open</span>
+      </a>
+  
+</li>
+
+        <li  class="tb-megamenu-item level-2 mega cd-mtag cd-mtag--closed" data-id="menu_link_content:39556bd5-af34-4fde-8b9b-6e6c4458838f" data-level="2" data-type="menu_item" data-class="cd-mtag cd-mtag--closed" data-xicon="" data-caption="Closed" data-alignsub="" data-group="1" data-hidewcol="0" data-hidesub="0" data-label="" aria-level="2" >
+      <a href="/contest/smart-home-and-wearables-project-contest-2025/" >
+          Smart Home &amp; Wearables Contest 2025
+              <span class="mega-caption">Closed</span>
+      </a>
+  
+</li>
+
+        <li  class="tb-megamenu-item level-2 mega cd-mtag cd-mtag--closed" data-id="menu_link_content:03d7f700-0aeb-47f4-9a9c-122f66a43c11" data-level="2" data-type="menu_item" data-class="cd-mtag cd-mtag--closed" data-xicon="" data-caption="Closed" data-alignsub="" data-group="1" data-hidewcol="0" data-hidesub="0" data-label="" aria-level="2" >
+      <a href="/contest/iot-edge-ai-project-challenge-2024/" >
+          IoT &amp; Edge AI Project Challenge 2024
+              <span class="mega-caption">Closed</span>
+      </a>
+  
+</li>
+
+        <li  class="tb-megamenu-item level-2 mega cd-mtag cd-mtag--closed" data-id="menu_link_content:b67f13ea-fd1a-40d2-82d4-37d0fef28fec" data-level="2" data-type="menu_item" data-class="cd-mtag cd-mtag--closed" data-xicon="" data-caption="Closed" data-alignsub="" data-group="1" data-hidewcol="0" data-hidesub="0" data-label="" aria-level="2" >
+      <a href="/contest/world-energy-challenge-2023" >
+          World Energy Challenge 2023
+              <span class="mega-caption">Closed</span>
+      </a>
+  
+</li>
+
+        <li  class="tb-megamenu-item level-2 mega cd-mtag cd-mtag--closed" data-id="menu_link_content:87316f15-e362-4527-809e-3dc4a98360dc" data-level="2" data-type="menu_item" data-class="cd-mtag cd-mtag--closed" data-xicon="" data-caption="Closed" data-alignsub="" data-group="1" data-hidewcol="0" data-hidesub="0" data-label="" aria-level="2" >
+      <a href="/contest/india-automation-challenge-2021/" >
+          India Automation Challenge 2021
+              <span class="mega-caption">Closed</span>
+      </a>
+  
+</li>
+
+  </ul>
+
+      </div>
+</div>
+
+  </div>
+
+      </div>
+</div>
+
+</li>
+
+        <li  class="tb-megamenu-item level-1 mega dropdown" data-id="menu_link_content:ed19b02f-675f-47c7-8a60-e6190f4a8738" data-level="1" data-type="menu_item" data-class="" data-xicon="" data-caption="" data-alignsub="" data-group="0" data-hidewcol="0" data-hidesub="0" data-label="" aria-level="1" >
+      <a href="/contact"  class="dropdown-toggle" aria-expanded="false">
+          Contact
+          <span class="caret"></span>
+          </a>
+  <div  class="tb-megamenu-submenu dropdown-menu mega-dropdown-menu nav-child" data-class="" data-width="" role="list">
+  <div class="mega-dropdown-inner">
+          <div  class="tb-megamenu-row row-fluid">
+      <div  class="tb-megamenu-column span12 mega-col-nav" data-class="" data-width="12" data-hidewcol="0" id="tb-megamenu-column-13">
+  <div class="tb-megamenu-column-inner mega-inner clearfix">
+               <ul  class="tb-megamenu-subnav mega-nav level-1 items-2" role="list">
+        <li  class="tb-megamenu-item level-2 mega" data-id="menu_link_content:63521baa-301c-43bf-98d2-71512dc05e3c" data-level="2" data-type="menu_item" data-class="" data-xicon="" data-caption="" data-alignsub="" data-group="1" data-hidewcol="0" data-hidesub="0" data-label="" aria-level="2" >
+      <a href="/advertise" >
+          Advertise
+          </a>
+  
+</li>
+
+        <li  class="tb-megamenu-item level-2 mega" data-id="menu_link_content:1e5cbd00-dd5c-49b9-831f-6c0661623771" data-level="2" data-type="menu_item" data-class="" data-xicon="" data-caption="" data-alignsub="" data-group="1" data-hidewcol="0" data-hidesub="0" data-label="" aria-level="2" >
+      <a href="/about-us" >
+          About Us
+          </a>
+  
+</li>
+
+  </ul>
+
+      </div>
+</div>
+
+  </div>
+
+      </div>
+</div>
+
+</li>
+
+            <li  class="tb-megamenu-item level-1 mega dropdown" data-id="menu_link_content:cb4b35cc-e000-478c-8c88-c4c4d63a16d6" data-level="1" data-type="menu_item" data-class="" data-xicon="" data-caption="" data-alignsub="" data-group="0" data-hidewcol="0" data-hidesub="0" data-label="" aria-level="1" >
+      <span class="dropdown-toggle tb-megamenu-no-link" aria-expanded="false" tabindex="0">
+          More
+          <span class="caret"></span>
+          </span>
+  <div  class="tb-megamenu-submenu dropdown-menu mega-dropdown-menu nav-child" data-class="" data-width="" role="list">
+  <div class="mega-dropdown-inner">
+          <div  class="tb-megamenu-row row-fluid">
+      <div  class="tb-megamenu-column span12 mega-col-nav" data-class="" data-width="12" data-hidewcol="0" id="tb-megamenu-column-13">
+  <div class="tb-megamenu-column-inner mega-inner clearfix">
+               <ul  class="tb-megamenu-subnav mega-nav level-1 items-3" role="list">
+        <li  class="tb-megamenu-item level-2 mega" data-id="menu_link_content:98aa9311-d76e-48a9-94f4-4c3b1e788d3a" data-level="2" data-type="menu_item" data-class="" data-xicon="" data-caption="" data-alignsub="" data-group="1" data-hidewcol="0" data-hidesub="0" data-label="" aria-level="2" >
+      <a href="/digikey-videos" >
+          DigiKey Videos
+          </a>
+  
+</li>
+
+        <li  class="tb-megamenu-item level-2 mega" data-id="menu_link_content:f8b34dc4-19f2-439c-a457-8806280cff45" data-level="2" data-type="menu_item" data-class="" data-xicon="" data-caption="" data-alignsub="" data-group="1" data-hidewcol="0" data-hidesub="0" data-label="" aria-level="2" >
+      <a href="/events" >
+          Partner Events and Conferences
+          </a>
+  
+</li>
+
+        <li  class="tb-megamenu-item level-2 mega" data-id="menu_link_content:99f4b107-acd3-42d6-802f-67c3f98ccc59" data-level="2" data-type="menu_item" data-class="" data-xicon="" data-caption="" data-alignsub="" data-group="1" data-hidewcol="0" data-hidesub="0" data-label="" aria-level="2" >
+      <a href="/calculators" >
+          EE Calculators
+          </a>
+  
+</li>
+
+  </ul>
+
+      </div>
+</div>
+
+  </div>
+
+      </div>
+</div>
+
+</li>
+
+  </ul>
+
+      </div>
+  </div>
+
+  </section>
+
+
+  </div>
+
+
+                  </nav>
+
+          </header>
+  <div class="container-fluid">
+	<div class="row addimage_header">
+		<div class="col-md-12 text-center">
+			  <div class="region region-adv">
+    <section id="block-block-content-db161a04-563e-4313-9376-9c40fd01cd79" class="block block-block-content block-block-contentdb161a04-563e-4313-9376-9c40fd01cd79 clearfix">
+  
+    
+
+      
+            <div class="field field--name-body field--type-text-with-summary field--label-hidden field--item"><p></p><center>
+<!-- /21034905/Billboard --><!-- /21034905/Billboard --><div class="digibill">
+<div id="div-gpt-ad-1522423126716-0" style="height:250px; width:970px;">
+<script type="9ed7aeb7ba36c64b3b7181b0-text/javascript">
+googletag.cmd.push(function() { googletag.display('div-gpt-ad-1522423126716-0'); });
+</script></div>
+</div>
+<p></p></center>
+</div>
+      
+  </section>
+
+
+  </div>
+
+		</div>
+	</div>
+</div>
+  <div role="main" class="main-container container-fluid js-quickedit-main-content">
+    <div class="row">
+
+                              <div class="col-sm-12">
+              <div class="region region-header">
+        <ol class="breadcrumb">
+          <li >
+                  <a href="/">Home</a>
+              </li>
+          <li >
+                  <a href="/microcontroller-projects">Microcontroller Based Projects</a>
+              </li>
+          <li  class="active">
+                  DS3231 RTC (Real Time Clock) Interfacing with Arduino to build DIY Digital Clock
+              </li>
+      </ol>
+
+<div data-drupal-messages-fallback class="hidden"></div>
+    <h1 class="page-header">
+<span>DS3231 RTC (Real Time Clock) Interfacing with Arduino to build DIY Digital Clock</span>
+</h1>
+
+
+  </div>
+
+          </div>
+              
+            
+                  <section class="col-sm-9">
+
+                
+                                      
+                  
+                          <a id="main-content"></a>
+          
+            <div class="region region-content">
+      <article data-history-node-id="20899" class="microcontroller full clearfix">
+
+  
+    
+
+  
+    <div class="user_data border-0">
+      <div class="row">
+              <div class="col-md-6 col-sm-4">
+          <a href="#">
+            <span class="rounded-circle text-white user_avtar"><img src="/sites/default/files/styles/forum_avatar/public/pictures/Screenshot_20220430-003501__01__01.jpg?itok=Hbi-L9mj" width="80" height="80" alt="User Avatar" loading="lazy" class="img-responsive" />
+
+  </span>
+          </a>
+                    <span class="name">
+<span><a title="View user profile." href="/users/harshilpatelhp99">Harshil Patel</a></span>
+</span><br>
+                    <span class="user-dec">Author</span>
+        </div>
+      
+        <div class="cd-byline-meta">
+          <span>May 11, 2022</span>
+          <span class="post_header_comment"><i class="fa fa-comment-o" aria-hidden="true"></i>&nbsp;&nbsp;1</span>
+        </div>
+
+                                <div class="cd-share">
+          <span class="cd-share__label">Share</span>
+          <a class="cd-share__btn cd-share__btn--whatsapp" href="https://wa.me/?text=DS3231%20RTC%20%28Real%20Time%20Clock%29%20Interfacing%20with%20Arduino%20to%20build%20DIY%20Digital%20Clock%20https%3A%2F%2Fcircuitdigest.com%2Fmicrocontroller-projects%2Finterfacing-ds3231-rtc-with-arduino-and-diy-digital-clock" target="_blank" rel="noopener nofollow" aria-label="Share on WhatsApp"><i class="fa fa-whatsapp" aria-hidden="true"></i></a>
+          <a class="cd-share__btn cd-share__btn--x" href="https://twitter.com/intent/tweet?url=https%3A%2F%2Fcircuitdigest.com%2Fmicrocontroller-projects%2Finterfacing-ds3231-rtc-with-arduino-and-diy-digital-clock&amp;text=DS3231%20RTC%20%28Real%20Time%20Clock%29%20Interfacing%20with%20Arduino%20to%20build%20DIY%20Digital%20Clock" target="_blank" rel="noopener nofollow" aria-label="Share on X"><svg viewBox="0 0 24 24" width="13" height="13" fill="currentColor" aria-hidden="true"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg></a>
+          <a class="cd-share__btn cd-share__btn--linkedin" href="https://www.linkedin.com/sharing/share-offsite/?url=https%3A%2F%2Fcircuitdigest.com%2Fmicrocontroller-projects%2Finterfacing-ds3231-rtc-with-arduino-and-diy-digital-clock" target="_blank" rel="noopener nofollow" aria-label="Share on LinkedIn"><i class="fa fa-linkedin" aria-hidden="true"></i></a>
+          <a class="cd-share__btn cd-share__btn--facebook" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fcircuitdigest.com%2Fmicrocontroller-projects%2Finterfacing-ds3231-rtc-with-arduino-and-diy-digital-clock" target="_blank" rel="noopener nofollow" aria-label="Share on Facebook"><i class="fa fa-facebook" aria-hidden="true"></i></a>
+          <button type="button" class="cd-share__btn cd-share__copy" data-url="https://circuitdigest.com/microcontroller-projects/interfacing-ds3231-rtc-with-arduino-and-diy-digital-clock" aria-label="Copy link"><i class="fa fa-link" aria-hidden="true"></i><span class="cd-share__copied">Copied</span></button>
+        </div>
+      </div>
+    </div>
+  
+<div class="content">
+
+  
+            <div class="field field--name-field-project-image field--type-image field--label-hidden field--item"><picture><source type="image/webp" srcset="/sites/default/files/styles/cd_webp_720/public/projectimage_mic/Arduino-DS3231-RTC-Module.jpg.webp?itok=Bu5qTKyA 720w, /sites/default/files/styles/cd_webp/public/projectimage_mic/Arduino-DS3231-RTC-Module.jpg.webp?itok=IA_a3ZKt 750w" sizes="(max-width: 750px) 100vw, 750px">  <img loading="eager" fetchpriority="high" src="/sites/default/files/projectimage_mic/Arduino-DS3231-RTC-Module.jpg" width="750" height="500" alt="Arduino DS3231 RTC Module" title="Arduino DS3231 RTC Module" class="img-responsive" />
+
+</picture></div>
+      
+  
+                                    <div class="field--name-body">
+              <p>In the digital world today, being able to accurately tell time is crucial for various embedded systems, IoT devices, and automation projects. The <strong>DS3231 RTC module</strong> is the most accurate and reliable real-time clock module to use in your Arduino projects. Unlike low-end timekeeping ICs found in basic timekeeping <span style="box-sizing:border-box;margin:0;padding:0;text-align:left;">devices, the&nbsp;<strong>Arduino real time clock DS3231</strong>&nbsp;features a temperature-compensated crystal oscillator (TCXO) that maintains its exceptional accuracy in varying</span> environmental conditions. If you are developing data loggers, GPS systems, or automation controllers in time-dependent applications, you need to know how to use the <strong>DS3231 real time clock.</strong><br>&nbsp;</p>
+                  <div style="background-color:#f0f8ff;border-left:4px solid #007acc;margin:20px 0;padding:15px;"><h3>DIY Digital Clock using DS3231 RTC and Arduino - Quick Overview</h3><p><strong>Build Time:</strong> 2-4 hours | <strong>Cost:</strong> $20-35 | <strong>Difficulty:</strong> Beginner</p><p><strong>What You'll Learn:</strong> I2C communication, RTC interfacing, LCD display programming, Time/date management</p><p><strong>Applications:</strong> Digital clocks, Data loggers, Automation timers, IoT timekeeping</p></div>
+                  
+<aside class="cd-sponsor" aria-label="Sponsored services" data-sponsor="pcbway" data-place="project" data-gam-unit="/21034905/cd_pcbway_home" data-gam-imp="1">
+  <span class="cd-sponsor__heading">Sponsored services</span>
+  <div class="cd-sponsor__items">
+          <a class="cd-sponsor__item" href="https://www.pcbway.com/?from=circuitdigestC2026" target="_blank" rel="sponsored nofollow noopener" data-item="pcb">
+        <img src="/themes/circuitdigest/images/sponsors/pcbway-pcb.jpg" alt="PCB Manufacturing" width="750" height="500" loading="lazy">
+        <span class="cd-sponsor__title">PCB Manufacturing</span>
+        <span class="cd-sponsor__text">Get high-quality custom PCBs with flexible options for prototyping and mass production.</span>
+      </a>
+          <a class="cd-sponsor__item" href="https://www.pcbway.com/?from=circuitdigestC2026" target="_blank" rel="sponsored nofollow noopener" data-item="3d">
+        <img src="/themes/circuitdigest/images/sponsors/pcbway-3d-printing.jpg" alt="Custom 3D Printing" width="750" height="500" loading="lazy">
+        <span class="cd-sponsor__title">Custom 3D Printing</span>
+        <span class="cd-sponsor__text">Turn your ideas into reality with precision 3D printing in a wide range of materials and technologies.</span>
+      </a>
+          <a class="cd-sponsor__item" href="https://www.pcbway.com/?from=circuitdigestC2026" target="_blank" rel="sponsored nofollow noopener" data-item="cnc">
+        <img src="/themes/circuitdigest/images/sponsors/pcbway-cnc.jpg" alt="CNC Machining" width="750" height="500" loading="lazy">
+        <span class="cd-sponsor__title">CNC Machining</span>
+        <span class="cd-sponsor__text">Get precision CNC milling and turning services for custom parts, prototypes, and production.</span>
+      </a>
+      </div>
+  <a class="cd-sponsor__logo" href="https://www.pcbway.com/?from=circuitdigestC2026" target="_blank" rel="sponsored nofollow noopener" data-item="logo">
+    <img src="/themes/circuitdigest/images/sponsors/pcbway-logo.png" alt="PCBWay" width="280" height="79" loading="lazy">
+  </a>
+  <div id="cd-pcbway-imp-project" style="position:absolute;width:1px;height:1px;overflow:hidden;left:0;top:0" aria-hidden="true"></div></aside>
+<div class="toc" style="background-color:#f8f9fa;border-radius:4px;margin:20px 0;max-width:800px;padding:20px;"><h3 style="color:#333;font-size:1.2em;margin:0 0 15px 0;"><strong>Table of Contents</strong></h3><ul style="list-style-type:none;margin:0;padding-left:0;"><li style="margin:5px 0;"><a style="color:#2c5282;display:inline-block;padding:2px 0;text-decoration:none;" href="#what-is-the-ds3231-real-time-clock-module-complete-introduction"><strong>What is the DS3231 Real Time Clock Module?</strong></a></li><li style="margin:5px 0 5px 20px;"><a style="color:#2c5282;display:inline-block;padding:2px 0;text-decoration:none;" href="#key-features-of-the-arduino-real-time-clock-ds3231-include"><strong>└ Key Features</strong></a></li><li style="margin:5px 0;"><a style="color:#2c5282;display:inline-block;padding:2px 0;text-decoration:none;" href="#ds3231-rtc-pinout-diagram-and-pin-configuration"><strong>Pinout Diagram and Pin Configuration&nbsp;</strong></a></li><li style="margin:5px 0 5px 20px;"><a style="color:#2c5282;display:inline-block;padding:2px 0;text-decoration:none;" href="#understanding-ds3231-pinout-configuration"><strong>└ Understanding DS3231 Pinout Configuration&nbsp;</strong></a></li><li style="margin:5px 0;"><a style="color:#2c5282;display:inline-block;padding:2px 0;text-decoration:none;" href="#ds3231-i2c-communication-protocol"><strong>DS3231 I2C Communication Protocol&nbsp;</strong></a></li><li style="margin:5px 0;"><a style="color:#2c5282;display:inline-block;padding:2px 0;text-decoration:none;" href="#frequently-asked-questions-about-ds3231-real-time-clock"><strong>Frequently Asked Questions</strong></a></li><li style="margin:5px 0;"><a style="color:#2c5282;display:inline-block;padding:2px 0;text-decoration:none;" href="#ds3231-rtc-module-schematic"><strong>Module Schematic&nbsp;</strong></a></li><li style="margin:5px 0 5px 20px;"><a style="color:#2c5282;display:inline-block;padding:2px 0;text-decoration:none;" href="#ds3231-module-schematic-analysis"><strong>└ Analysis&nbsp;</strong></a></li><li style="margin:5px 0;"><a style="color:#2c5282;display:inline-block;padding:2px 0;text-decoration:none;" href="#ds3231-rtc-arduino-programming-setup-and-time-setting-code"><strong>Set Up and Time Setting Code&nbsp;</strong></a></li><li style="margin:5px 0 5px 20px;"><a style="color:#2c5282;display:inline-block;padding:2px 0;text-decoration:none;" href="#installing-arduino-ds3231-rtc-library"><strong>└ Installing Arduino DS3231 RTC Library&nbsp;</strong></a></li><li style="margin:5px 0;"><a style="color:#2c5282;display:inline-block;padding:2px 0;text-decoration:none;" href="#ds3231-arduino-code-for-time-setting"><strong>Code for Time Setting&nbsp;</strong></a></li><li style="margin:5px 0;"><a style="color:#2c5282;display:inline-block;padding:2px 0;text-decoration:none;" href="#arduino-real-time-clock-ds3231-issues-troubleshooting"><strong>Troubleshooting&nbsp;</strong></a></li><li style="margin:5px 0;"><a style="color:#2c5282;display:inline-block;padding:2px 0;text-decoration:none;" href="#diy-arduino-digital-clock-project-with-ds3231-and-lcd-display"><strong>Digital Clock Project with DS3231 and LCD Display&nbsp;</strong></a></li><li style="margin:5px 0 5px 20px;"><a style="color:#2c5282;display:inline-block;padding:2px 0;text-decoration:none;" href="#required-components-for-digital-clock-project"><strong>└ Required Components</strong></a></li><li style="margin:5px 0 5px 20px;"><a style="color:#2c5282;display:inline-block;padding:2px 0;text-decoration:none;" href="#digital-clock-circuit-diagram-with-ds3231"><strong>└ Circuit Diagram&nbsp;</strong></a></li><li style="margin:5px 0;"><a style="color:#2c5282;display:inline-block;padding:2px 0;text-decoration:none;" href="#arduino-real-time-clock-ds3231-lcd-code"><strong>Code&nbsp;</strong></a></li><li style="margin:5px 0;"><a style="color:#2c5282;display:inline-block;padding:2px 0;text-decoration:none;" href="#ds3231-vs-ds1307-real-time-clock-comparison"><strong>DS3231 vs DS1307&nbsp;</strong></a></li><li style="margin:5px 0 5px 20px;"><a style="color:#2c5282;display:inline-block;padding:2px 0;text-decoration:none;" href="#key-differences-ds3231-vs-ds1307"><strong>└ Key Differences</strong></a></li><li style="margin:5px 0;"><a style="color:#2c5282;display:inline-block;padding:2px 0;text-decoration:none;" href="#technical-summary-and-github-repository"><strong>GitHub Repository&nbsp;&nbsp;</strong></a></li><li style="margin:5px 0;"><a style="color:#2c5282;display:inline-block;padding:2px 0;text-decoration:none;" href="#creative-timekeeping-and-display-projects-with-arduino"><strong>Related Projects&nbsp;</strong></a></li></ul></div>   
+                  <h3 id="what-is-the-ds3231-real-time-clock-module-complete-introduction"><strong>What is the DS3231 Real Time Clock Module? - Complete Introduction</strong></h3><p class="text-align-justify">The DS3231 RTC module is a real-time clock that uses less power and has highly accurate communication via an I2C interface. Also, the DS3231 real time clock has its temperature-compensated crystal oscillator and crystal resonator. Hence, the timekeeping accuracy of this device is much superior to that given by most RTC modules, such as the DS1307. The module can accept a backup battery to keep time, so during a power outage, the clock continues its work.</p><h4 class="text-align-justify" id="key-features-of-the-arduino-real-time-clock-ds3231-include"><strong>Key Features of the Arduino Real Time Clock DS3231 include:</strong></h4><p><strong>∗</strong> Very high accuracy ±2ppm from 0° to +40°<br><strong>∗ </strong>I2C interface, so it is easy to connect to Arduino<br><strong>∗</strong> Battery backup with automatic power switching<br><strong>∗</strong> Temperature compensated for crystal stability<br><strong>∗ </strong>Two programmable time-of-day alarms<br><strong>∗</strong> Programmable square-wave output<br><strong>∗</strong> Automatic leap year and month-end date adjustment</p>
+                  <h3 class="text-align-justify" id="ds3231-rtc-pinout-diagram-and-pin-configuration"><strong>DS3231 RTC Pinout Diagram and Pin Configuration</strong></h3><p class="text-align-justify">The DS3231 RTC pinout has 6 pins to get data from the module and supply power to the board. This DS3231 RTC pinout arrangement allows microcontroller interfacing, while also providing additional features such as square wave output and 32kHz oscillator access.</p><p class="text-align-justify"><picture><source type="image/webp" srcset="/sites/default/files/styles/cd_webp_720/public/inlineimages/u4/DS3231-Pinout.jpg.webp?itok=p4qUOCJW 720w, /sites/default/files/styles/cd_webp/public/inlineimages/u4/DS3231-Pinout.jpg.webp?itok=VPbKUR0o 750w" sizes="(max-width: 750px) 100vw, 750px"><img loading="lazy" src="/sites/default/files/inlineimages/u4/DS3231-Pinout.jpg" data-entity-uuid="89d3de32-1d09-4688-a23c-13ca4b1ab42c" data-entity-type="file" alt="DS3231 RTC Module Pinout" width="750" height="349"></picture></p><h4 id="understanding-ds3231-pinout-configuration"><strong>Understanding DS3231 Pinout Configuration</strong></h4><p class="rtejustify"><span class="vo sl-01" style="margin-right:8px;"><strong>» &nbsp;32K</strong></span> 32K oscillator output</p><p class="rtejustify"><span class="vo sl-01" style="margin-right:8px;"><strong>»</strong></span><span class="rs sl-01" style="margin-right:8px;"><strong>SQW</strong></span> Square Wave output pin</p><p class="rtejustify"><span class="vo sl-01" style="margin-right:8px;"><strong>»</strong></span><span class="out sl-01" style="margin-right:8px;"><strong>SCL</strong></span> Serial Clock pin (I2C interface)</p><p class="rtejustify"><span class="vo sl-01" style="margin-right:8px;"><strong>»</strong></span><span class="enable sl-01" style="margin-right:8px;"><strong>SDA</strong></span> Serial Data pin (I2C interface)</p><p class="rtejustify"><span class="vo sl-01" style="margin-right:8px;"><strong>»</strong></span><span class="vcc sl-01" style="margin-right:8px;"><strong>VCC</strong></span> is connected to the positive terminal of the power source</p><p class="rtejustify"><span class="vo sl-01" style="margin-right:8px;"><strong>»</strong></span><span class="gnd sl-01" style="margin-right:8px;"><strong>GND</strong></span> is connected to the ground</p><p class="text-align-justify">When we probe the DS3231 Module’s 32 kHz pin using an Oscilloscope, we get a 32kHz signal from the IC’s internal oscillator.</p><p class="text-align-justify"><picture><source type="image/webp" srcset="/sites/default/files/styles/cd_webp_720/public/inlineimages/u4/DS3231-Signal.png.webp?itok=cb__-eNL 720w, /sites/default/files/styles/cd_webp/public/inlineimages/u4/DS3231-Signal.png.webp?itok=YUw4fMlu 750w" sizes="(max-width: 750px) 100vw, 750px"><img loading="lazy" src="/sites/default/files/inlineimages/u4/DS3231-Signal.png" data-entity-uuid="998232f5-1ac5-4e66-aa3b-21fb10c07d00" data-entity-type="file" alt="DS3231 RTC Signal" width="750" height="450"></picture></p>
+                  <!-- /21034905/Welcome_Ad2 -->
+<div class="welcomeextra"><div id="div-gpt-ad-1508834807558-1" style="width: 640px; height: 480px;">
+<script type="9ed7aeb7ba36c64b3b7181b0-text/javascript">
+googletag.cmd.push(function() { googletag.display("div-gpt-ad-1508834807558-1"); });
+</script>
+</div></div><h3 class="text-align-justify" id="ds3231-i2c-communication-protocol"><strong>DS3231 I2C Communication Protocol</strong></h3><p class="text-align-justify">The key components of a typical DS3231 RTC Module board are the DS3231 IC and the AT24C32 EEPROM IC to store the time and date data. Other components include a Power ON LED, a few resistors, capacitors, a battery holder, and pins for connecting to the microcontroller.</p><p class="text-align-justify"><picture><source type="image/webp" srcset="/sites/default/files/styles/cd_webp_720/public/inlineimages/u4/DS3231-RTC-Module-Parts.jpg.webp?itok=TbrRop5z 720w, /sites/default/files/styles/cd_webp/public/inlineimages/u4/DS3231-RTC-Module-Parts.jpg.webp?itok=1lMoGlIA 750w" sizes="(max-width: 750px) 100vw, 750px"><img loading="lazy" src="/sites/default/files/inlineimages/u4/DS3231-RTC-Module-Parts.jpg" data-entity-uuid="4ec742f4-14f2-45d4-ae8c-aa2fd75f82ab" data-entity-type="file" alt="DS3231 RTC Module Components" width="750" height="362"></picture></p><p class="text-align-justify">When the main power to the module is stopped, the DS3231 contains a battery input and maintains accurate time. The built-in power-sense circuit constantly checks the condition of VCC to identify power outages and switches to the backup supply automatically. So, even if the power goes out, your MCU will still be able to maintain track of time. On the DS3231 RTC Arduino, there is a CR2032 battery holder. A battery holder for a 20mm 3V lithium coin cell is located on the board's bottom side. Any CR2032 battery will work.</p><p class="text-align-justify"><strong>Charging Capability:</strong></p><p class="text-align-justify">The module is designed in such a way that when powered externally, it can charge the battery installed on the module. But one must be careful while using a non-rechargeable CR2032 Cell, as the module will also charge the cell. The CR2032 is a 3V cell that is not rechargeable, but a rechargeable cell can be charged to 4.2V. To stop the module from charging the CR2032 non-rechargeable cell, the U4(220R) Resistor or D1 (1N4148) Diode should be desoldered.</p><p class="text-align-justify">The DS3231 RTC communicates with Arduino using the I2C communication standard, having the fixed device address of 0x68. &nbsp;I squared I2C interface has been standardised in such a way that there can be more than one I squared C device on the same bus; hence, it is perfect for the bigger Arduino projects, which may need several sensors and modules.</p> 
+                  <h3 id="frequently-asked-questions-about-ds3231-real-time-clock"><strong>Frequently Asked Questions about DS3231 Real Time Clock</strong></h3><p><strong>⇥ What is the difference between DS1307 and DS3231?</strong><br>The most significant difference between the DS3231 and the DS1370 is the timekeeping accuracy. For timekeeping, the DS1307 has an external 32kHz crystal oscillator, while the DS3231 has an internal oscillator.</p><p><strong>⇥&nbsp;How accurate is DS3231?</strong><br>The temperature-compensated crystal oscillator (TCXO) in the DS3231 and DS3234 fits the bill, with precision as good as ±2 ppm in temperatures ranging from 0°C to +40°C.</p><p><strong>⇥&nbsp;What battery does DS3231 use?</strong><br>The DS3231 uses a CR2032 rechargeable cell, but if one wants to use a non-rechargeable cell, a minor modification is to be made to the module.</p><p><strong>⇥&nbsp;Why is my DS3231 RTC module not working?</strong><br>The module may not be working for several reasons: Incorrect I2C wiring (check SDA/SCL w.r.t. pull-up resistors); dead backup battery; library specified differs from installed library; and possible conflicts with libraries, etc. You should check connections, correct power supply (3.3V-5V range); make sure you change the battery for one that is fresh CR2032; check that the RTClib library is installed, etc.</p><p><strong>⇥&nbsp;How durable is a DS3231 battery Backup?</strong><br>Typically, a quality CR2032 battery on a DS3231 module has a shelf life of 8 - 10 years in backup mode, but this will depend on ambient temperature and, of course, quality. The low power draw of the DS3231 RTC module during the backup operation (less than 3µA) ensures a successful timekeeping duration.</p> 
+                  <!-- /21034905/CD_Half_Page_Banner2 -->
+<div id="div-gpt-ad-1719307821746-0" style="width: 300px; height: 600px;">
+  <script type="9ed7aeb7ba36c64b3b7181b0-text/javascript">
+    googletag.cmd.push(function() { googletag.display("div-gpt-ad-1719307821746-0"); });
+  </script>
+</div><h3 class="text-align-justify" id="ds3231-rtc-module-schematic"><strong>DS3231 RTC Module Schematic</strong></h3><p class="text-align-justify">In this DS3231 RTC module, a number of different components are there, all of which are needed for the RTC to be kept together and store data. Knowing the DS3231 RTC module schematic is helpful when you want to troubleshoot or modify the RTC for your project.</p><p class="text-align-justify"><picture><source type="image/webp" srcset="/sites/default/files/styles/cd_webp/public/inlineimages/u4/DS3231-Circuit.png.webp?itok=bz3B4n0z 538w" sizes="(max-width: 538px) 100vw, 538px"><img loading="lazy" src="/sites/default/files/inlineimages/u4/DS3231-Circuit.png" data-entity-uuid="81d50ebe-abfb-4f9f-8a2e-c265a2c9d809" data-entity-type="file" alt="DS3231 RTC Module Internal Schematic" width="538" height="310"></picture></p><h4 id="ds3231-module-schematic-analysis"><strong>DS3231 Module Schematic Analysis</strong></h4><p><strong>The entire DS3231 RTC module circuit diagram shows the internal configuration as follows:</strong></p><p><strong>∗ DS3231 IC: </strong>Main Real Time Clock controller with a TCXO integrated<br><strong>∗&nbsp;AT24C32 EEPROM: </strong>32KB storage of time/date data &amp; user applications<br><strong>∗ CR2032 Battery Holder:</strong> Backup power source (3V lithium coin cell)<br><strong>∗&nbsp;Power Management Circuit:</strong> Automatically switches between main and backup power<br><strong>∗&nbsp;Pull-up Resistors:</strong> I2C bus signal conditioning (typically 4.7kΩ pulled up)<br><strong>∗&nbsp;Power Indicator LED:</strong> Indicates that the module has power</p><p>&nbsp;</p>    
+                  <!-- /21034905/Welcome_Ad3 -->
+<div class="welcomeextra"><div id="div-gpt-ad-1632744355244-0" style="width: 640px; height: 480px;">
+<script type="9ed7aeb7ba36c64b3b7181b0-text/javascript">
+googletag.cmd.push(function() { googletag.display("div-gpt-ad-1632744355244-0"); });
+</script>
+</div></div><h3 id="ds3231-rtc-arduino-programming-setup-and-time-setting-code"><strong>DS3231 RTC Arduino Programming: Setup and Time Setting Code</strong></h3><p class="text-align-justify"><span style="-webkit-text-stroke-width:0px;background-color:rgb(255, 255, 255);box-sizing:inherit;color:rgb(23, 43, 77);font-family:&quot;Open Sans&quot;, sans-serif;font-size:16px;font-style:normal;font-variant-caps:normal;font-variant-ligatures:normal;font-weight:400;letter-spacing:normal;orphans:2;text-align:start;text-decoration-color:initial;text-decoration-style:initial;text-decoration-thickness:initial;text-indent:0px;text-transform:none;white-space:pre-wrap;widows:2;word-spacing:0px;" id="input-sentence~0" classification="HUMAN">When programming the <strong>DS3231 RTC Arduino</strong> interface, it's important to correctly install the necessary libraries and understand the communication protocols.</span><span style="-webkit-text-stroke-width:0px;background-color:rgb(255, 255, 255);box-sizing:inherit;color:rgb(23, 43, 77);font-family:&quot;Open Sans&quot;, sans-serif;font-size:16px;font-style:normal;font-variant-caps:normal;font-variant-ligatures:normal;font-weight:400;letter-spacing:normal;orphans:2;text-align:start;text-decoration-color:initial;text-decoration-style:initial;text-decoration-thickness:initial;text-indent:0px;text-transform:none;white-space:pre-wrap;widows:2;word-spacing:0px;"> </span><span style="-webkit-text-stroke-width:0px;background-color:rgb(255, 255, 255);box-sizing:inherit;color:rgb(23, 43, 77);font-family:&quot;Open Sans&quot;, sans-serif;font-size:16px;font-style:normal;font-variant-caps:normal;font-variant-ligatures:normal;font-weight:400;letter-spacing:normal;orphans:2;text-align:start;text-decoration-color:initial;text-decoration-style:initial;text-decoration-thickness:initial;text-indent:0px;text-transform:none;white-space:pre-wrap;widows:2;word-spacing:0px;" id="input-sentence~1" classification="HUMAN">The DS3231 RTC module code development involves initialising the I2C connection, publishing the current time, and retrieving time data for your applications</span></p><p class="text-align-justify"><picture><source type="image/webp" srcset="/sites/default/files/styles/cd_webp_720/public/inlineimages/u4/Arduino-DS3231-RTC-Connection.png.webp?itok=5b6-sYG0 720w, /sites/default/files/styles/cd_webp/public/inlineimages/u4/Arduino-DS3231-RTC-Connection.png.webp?itok=LWCH2UYw 750w" sizes="(max-width: 750px) 100vw, 750px"><img loading="lazy" src="/sites/default/files/inlineimages/u4/Arduino-DS3231-RTC-Connection.png" data-entity-uuid="a1418ed4-9469-4738-93c8-5143b9ef8cfd" data-entity-type="file" alt="Arduino DS3231 RTC Module Circuit" width="750" height="453"></picture></p><p class="text-align-justify">&nbsp;</p><h4 class="text-align-justify" id="installing-arduino-ds3231-rtc-library"><strong>Installing Arduino DS3231 RTC Library</strong></h4><p class="text-align-justify">After making the above connections, you need to connect the Arduino UNO to your PC, open Arduino IDE, and install the DS3231 RTC Arduino Time Set Library. Open the Arduino IDE and select Library Manager from the menu bar. Now look for <strong>RTCLib </strong>and DS3231 and get the most recent version, as shown in the figure below.</p><p class="text-align-justify"><picture><source type="image/webp" srcset="/sites/default/files/styles/cd_webp_720/public/inlineimages/u4/Arduino-DS3231-Library.png.webp?itok=GnyYVBFU 720w, /sites/default/files/styles/cd_webp/public/inlineimages/u4/Arduino-DS3231-Library.png.webp?itok=3MmlRA6O 750w" sizes="(max-width: 750px) 100vw, 750px"><img loading="lazy" src="/sites/default/files/inlineimages/u4/Arduino-DS3231-Library.png" data-entity-uuid="8c407966-d6f9-4eca-8b68-fda8473025fe" data-entity-type="file" alt="Arduino DS3231 Library" width="750" height="423"></picture></p>        
+                  <h3 class="text-align-justify" id="ds3231-arduino-code-for-time-setting"><strong>DS3231 Arduino Code for Time Setting</strong></h3><p class="text-align-justify">The code is quite straightforward. It will set the time and then show it on the serial monitor.</p><pre><code class="language-cpp">rtc.adjust(DateTime(F(__DATE__),F(__TIME__)));</code></pre><p class="text-align-justify">The rtc object sets the time according to the time on your computer in this line. It will change your system's current clock time.</p><pre><code class="language-cpp">rtc.adjust(DateTime(2014, 1, 21, 3, 0, 0));</code></pre><p class="text-align-justify">You may manually set the time in this line by passing the date-time value to the function in the following order: year, month, date, hour, minute, and second. We'll set the time of the system in the code below. As a result, we have commented out this line.</p><pre><code class="language-cpp">#include &lt;RTClib.h&gt;
+#include &lt;Wire.h&gt;
+RTC_DS3231 rtc;
+char t[32];
+void setup()
+{
+  Serial.begin(9600);
+  Wire.begin();
+  rtc.begin();
+  rtc.adjust(DateTime(F(__DATE__),F(__TIME__)));
+  //rtc.adjust(DateTime(2019, 1, 21, 5, 0, 0));
+}
+void loop()
+{
+  DateTime now = rtc.now();
+  sprintf(t, "%02d:%02d:%02d %02d/%02d/%02d", now.hour(), now.minute(), now.second(), now.day(), now.month(), now.year());  
+  Serial.print(F("Date/Time: "));
+  Serial.println(t);
+  delay(1000);
+}</code></pre>
+                  <h3 id="arduino-real-time-clock-ds3231-issues-troubleshooting"><strong>Arduino Real Time Clock DS3231 Issues Troubleshooting</strong></h3><p>The most common Arduino real time clock DS3231 issues when used with Arduino:</p><ul><li><strong>Module not found: </strong>Check I2C connections (SDA to A4, SCL to A5)</li><li><strong>Incorrect time: </strong>Check the system time on the computer before uploading code to the Arduino</li><li><strong>Time lost:</strong> Ensure the CR2032 battery is properly installed and charged</li><li><strong>Bad communication:</strong> Make sure you have 4.7kΩ pull-up resistors on the I2C data lines<br>&nbsp;</li></ul>
+                  <h3 id="diy-arduino-digital-clock-project-with-ds3231-and-lcd-display"><strong>DIY Arduino Digital Clock Project with DS3231 and LCD Display</strong></h3><p>Constructing a digital clock with the DS3231 RTC Module and 16x2 LCD shows how to practically use the real time clock. This project shows the precision of the DS3231 real time clock combined with the use of visual display components for creating professional-quality timepieces.</p><h4 class="text-align-justify" id="required-components-for-digital-clock-project"><strong>Required Components for Digital Clock Project</strong></h4><ul><li><p class="text-align-justify">Arduino Uno</p></li><li><p class="text-align-justify">DS3231 RTC Module</p></li><li><p class="text-align-justify">LCD Display 16*2</p></li><li><p class="text-align-justify">Jumper Wire</p></li><li><p class="text-align-justify">10K Preset</p></li><li><p class="text-align-justify">3V coin cell (CR2032)</p></li></ul><h4 class="text-align-justify" id="digital-clock-circuit-diagram-with-ds3231"><strong>Digital Clock Circuit Diagram with DS3231</strong></h4><p><a href="/fullimage?i=circuitdiagram_mic/Arduino-Digital-Clock-Circuit.png" target="_blank"><picture><source type="image/webp" srcset="/sites/default/files/styles/cd_webp_720/public/circuitdiagram_mic/Arduino-Digital-Clock-Circuit.png.webp?itok=n8USK-6n 720w, /sites/default/files/styles/cd_webp/public/circuitdiagram_mic/Arduino-Digital-Clock-Circuit.png.webp?itok=5194EgEQ 1293w" sizes="(max-width: 1293px) 100vw, 1293px"><img loading="lazy" src="/sites/default/files/circuitdiagram_mic/Arduino-Digital-Clock-Circuit.png" data-entity-uuid="insert-image-554995d3-d376-411f-92d5-5c2f49b5b809" data-entity-type="file" alt="Arduino Digital Clock Circuit" width="750" height="488" data-insert-class="" title="Arduino Digital Clock Circuit"></picture></a></p><ul><li><p class="text-align-justify">Connect the SCL of the RTC module to the Arduino A5</p></li><li><p class="text-align-justify">Connect the SDA of the RTC module to the Arduino A4</p></li><li><p class="text-align-justify">Connect VCC to 5v and GND to GND</p></li><li><p class="text-align-justify">Connect the RS of the LCD to pin 7 of the Arduino</p></li><li><p class="text-align-justify">Connect the E of the LCD to pin 6 of the Arduino</p></li><li><p class="text-align-justify">Connect D7 of the LCD to pin 2 of the Arduino</p></li><li><p class="text-align-justify">Connect D6 of the LCD to pin 3 of the Arduino</p></li><li><p class="text-align-justify">Connect D5 of the LCD to pin 4 of the Arduino</p></li><li><p class="text-align-justify">Connect D4 of the LCD to pin 5 of the Arduino</p></li><li><p class="text-align-justify">Connect VSS,K,RW,D0,D1,D2,D3 to the GND</p></li><li><p class="text-align-justify">Connect VDD &amp; A to the 5v</p></li><li><p class="text-align-justify">Connect VO to the potentiometer output pin ( To control the contrast of text)</p></li></ul>
+                  <h3 class="text-align-justify" id="arduino-real-time-clock-ds3231-lcd-code"><strong>Arduino Real Time Clock DS3231 LCD Code</strong></h3><p class="text-align-justify">We include the following header files in the code: Wire.h to use I2C to communicate with the module, <strong>LiquidCrystal.h</strong> to show time on the LCD display, and <strong>RTClib.h</strong> to set the time to the display and format it.</p><pre><code class="language-cpp">#include &lt;Wire.h&gt;
+#include &lt;LiquidCrystal.h&gt;
+#include &lt;RTClib.h&gt;</code></pre><p class="text-align-justify">This line in the code specifies which pin of the LCD is connected to which pin of the Arduino.</p><pre><code class="language-cpp">LiquidCrystal lcd(7, 6, 5, 4, 3, 2); // (rs, e, d4, d5, d6, d7)</code></pre><p class="text-align-justify">If the project is fired up with a break in the connection, the code will print RTC Module not Present, in the serial monitor.</p><pre><code class="language-cpp">if (! rtc.begin())
+  {
+    Serial.println(" RTC Module not Present");
+    while (1);
+  }</code></pre><p class="text-align-justify">If in case the RTC loses power and the time in the module goes wrong, the code will automatically set the time in the module, and it will take the time from the computer's clock. So, make sure that while setting the time, the clock on your PC is set at the right time.</p><pre><code class="language-cpp">if (rtc.lostPower())
+  {
+    Serial.println("RTC power failure, reset the time!");
+    rtc.adjust(DateTime(F(__DATE__), F(__TIME__)));
+  }</code></pre><p class="text-align-justify">This section of the code sets the cursor on the LCD to 0 and prints the date in the format Date/Month/Year.</p><pre><code class="language-cpp">void displayDate()
+ {
+  lcd.setCursor(0,0);
+  lcd.print("Date:");
+  lcd.print(now.day());
+  lcd.print('/');
+  lcd.print(now.month());
+  lcd.print('/');
+  lcd.print(now.year());
+ }
+</code></pre><p class="text-align-justify">This section of the code sets the cursor to 1 and prints the time in the format Hour:Minute: Second.</p><pre><code class="language-cpp"> void displayTime()
+ {
+  lcd.setCursor(0,1);
+  lcd.print("Time:");
+  lcd.print(now.hour());
+  lcd.print(':');
+  lcd.print(now.minute());
+  lcd.print(':');
+  lcd.print(now.second());
+  lcd.print("    ");
+ }
+</code></pre><p class="text-align-justify">After uploading the code, you will be able to see the date and time on the LCD screen.</p><p class="rtejustify"><video autoplay="autoplay" loop="loop" muted=""><source src="/sites/default/files/other/Arduino-DIY-Clock.mp4" type="video/mp4"></video></p>
+                  <h3 id="ds3231-vs-ds1307-real-time-clock-comparison"><strong>DS3231 vs DS1307: Real Time Clock Comparison</strong></h3><p>In understanding the differences between the DS3231 RTC Module and the DS1307, you can make an informed choice for your project's timeliness requirements. The accuracy and reliability of the DS3231 real-time clock and all of the integrated features make it a very good solution.</p><h4 class="text-align-justify" id="key-differences-ds3231-vs-ds1307"><strong>Key Differences: DS3231 vs DS1307</strong></h4><table style="border-collapse:collapse;width:533.4pt;" border="1" cellspacing="0" cellpadding="0" width="711"><tbody><tr><td style="background-color:#0070C0;border:1.5pt solid windowtext;padding:.75pt;"><p class="text-align-justify" style="text-justify:inter-ideograph;"><span style="color:black;font-size:14.0pt;"><strong>Feature</strong></span></p></td><td style="background-color:#0070C0;border-bottom-style:solid;border-color:windowtext;border-left-style:none;border-right-style:solid;border-top-style:solid;border-width:1.5pt;padding:.75pt;"><p class="text-align-justify" style="text-justify:inter-ideograph;"><span style="color:black;font-size:14.0pt;"><strong>DS3231 RTC Module</strong></span></p></td><td style="background-color:#0070C0;border-bottom-style:solid;border-color:windowtext;border-left-style:none;border-right-style:solid;border-top-style:solid;border-width:1.5pt;padding:.75pt;"><p class="text-align-justify" style="text-justify:inter-ideograph;"><span style="color:black;font-size:14.0pt;"><strong>DS1307</strong></span></p></td></tr><tr><td style="border-bottom-style:solid;border-color:windowtext;border-left-style:solid;border-right-style:solid;border-top-style:none;border-width:1.5pt;padding:.75pt;"><p class="text-align-justify" style="text-justify:inter-ideograph;"><span style="font-size:14.0pt;">Crystal Oscillator</span></p></td><td style="border-bottom:1.5pt solid windowtext;border-left-style:none;border-right:1.5pt solid windowtext;border-top-style:none;padding:.75pt;"><p class="text-align-justify" style="text-justify:inter-ideograph;"><span style="font-size:14.0pt;">Internal TCXO (Temperature Compensated)</span></p></td><td style="border-bottom:1.5pt solid windowtext;border-left-style:none;border-right:1.5pt solid windowtext;border-top-style:none;padding:.75pt;"><p class="text-align-justify" style="text-justify:inter-ideograph;"><span style="font-size:14.0pt;">External 32kHz Crystal Required</span></p></td></tr><tr><td style="border-bottom-style:solid;border-color:windowtext;border-left-style:solid;border-right-style:solid;border-top-style:none;border-width:1.5pt;padding:.75pt;"><p class="text-align-justify" style="text-justify:inter-ideograph;"><span style="font-size:14.0pt;">Accuracy</span></p></td><td style="border-bottom:1.5pt solid windowtext;border-left-style:none;border-right:1.5pt solid windowtext;border-top-style:none;padding:.75pt;"><p class="text-align-justify" style="text-justify:inter-ideograph;"><span style="font-size:14.0pt;">±2ppm (0°C to +40°C)</span></p></td><td style="border-bottom:1.5pt solid windowtext;border-left-style:none;border-right:1.5pt solid windowtext;border-top-style:none;padding:.75pt;"><p class="text-align-justify" style="text-justify:inter-ideograph;"><span style="font-size:14.0pt;">±2 minutes/month (typical)</span></p></td></tr><tr><td style="border-bottom-style:solid;border-color:windowtext;border-left-style:solid;border-right-style:solid;border-top-style:none;border-width:1.5pt;padding:.75pt;"><p class="text-align-justify" style="text-justify:inter-ideograph;"><span style="font-size:14.0pt;">Temperature Compensation</span></p></td><td style="border-bottom:1.5pt solid windowtext;border-left-style:none;border-right:1.5pt solid windowtext;border-top-style:none;padding:.75pt;"><p class="text-align-justify" style="text-justify:inter-ideograph;"><span style="font-size:14.0pt;">Automatic (-40°C to +85°C)</span></p></td><td style="border-bottom:1.5pt solid windowtext;border-left-style:none;border-right:1.5pt solid windowtext;border-top-style:none;padding:.75pt;"><p class="text-align-justify" style="text-justify:inter-ideograph;"><span style="font-size:14.0pt;">None</span></p></td></tr><tr><td style="border-bottom-style:solid;border-color:windowtext;border-left-style:solid;border-right-style:solid;border-top-style:none;border-width:1.5pt;padding:.75pt;"><p class="text-align-justify" style="text-justify:inter-ideograph;"><span style="font-size:14.0pt;">Built-in Battery Backup</span></p></td><td style="border-bottom:1.5pt solid windowtext;border-left-style:none;border-right:1.5pt solid windowtext;border-top-style:none;padding:.75pt;"><p class="text-align-justify" style="text-justify:inter-ideograph;"><span style="font-size:14.0pt;">Automatic power switching</span></p></td><td style="border-bottom:1.5pt solid windowtext;border-left-style:none;border-right:1.5pt solid windowtext;border-top-style:none;padding:.75pt;"><p class="text-align-justify" style="text-justify:inter-ideograph;"><span style="font-size:14.0pt;">Manual configuration required</span></p></td></tr><tr><td style="border-bottom-style:solid;border-color:windowtext;border-left-style:solid;border-right-style:solid;border-top-style:none;border-width:1.5pt;padding:.75pt;"><p class="text-align-justify" style="text-justify:inter-ideograph;"><span style="font-size:14.0pt;">Alarms</span></p></td><td style="border-bottom:1.5pt solid windowtext;border-left-style:none;border-right:1.5pt solid windowtext;border-top-style:none;padding:.75pt;"><p class="text-align-justify" style="text-justify:inter-ideograph;"><span style="font-size:14.0pt;">Two programmable alarms</span></p></td><td style="border-bottom:1.5pt solid windowtext;border-left-style:none;border-right:1.5pt solid windowtext;border-top-style:none;padding:.75pt;"><p class="text-align-justify" style="text-justify:inter-ideograph;"><span style="font-size:14.0pt;">None</span></p></td></tr></tbody></table><p>For the cases where the accurate capture of time is necessary using an RTC, the Arduino DS3231 real-time clock is a more stable solution than the DS1307. The DS3231 real-time clock is better suited for engineering, data logging situations, and IoT applications, where maintaining accurate time is essential.</p>
+                  <h3 id="technical-summary-and-github-repository"><strong>Technical Summary and GitHub Repository&nbsp;</strong></h3><p>The DS3231 RTC module is a major change towards microcontrollers keeping time. Permanently integrated into the DS3231 is a temperature-compensated crystal oscillator (TCXO), making the RTC module accurate to ±2ppm within industrial temperature limits. In our GitHub repository, we have complete source code, libraries, and project files associated with all DS3231 Arduino implementations.&nbsp;</p><div><a href="https://github.com/Circuit-Digest/Basic-Arduino-Tutorials-for-Beginners-/tree/main/Pulse_Sensor_with_Arduino" target="_blank"><img loading="lazy" src=" https://circuitdigest.com//sites/default/files/inlineimages/u4/btn_code_schematics.png" data-entity-uuid="" data-entity-type="" alt="" width="275" height="79"></a><a href="https://github.com/Circuit-Digest/Basic-Arduino-Tutorials-for-Beginners-/archive/refs/heads/main.zip"><img loading="lazy" src=" https://circuitdigest.com//sites/default/files/inlineimages/u4/download_btn.png" data-entity-uuid="" data-entity-type="" alt="" width="72" height="79"></a></div><div>&nbsp;</div><div>Please ask any questions regarding this project in the comments section below, as well as share improvements in our Circuitdigest <a href="https://circuitdigest.com/forum" target="_blank"><strong>forum</strong></a> community.</div>
+                  <h3 id="creative-timekeeping-and-display-projects-with-arduino"><strong>Creative Timekeeping and Display Projects with Arduino</strong></h3><p class="rtejustify">Create innovative Arduino-based time display solutions by exploring a range of projects that combine real-time clocks, seven-segment displays, and LED matrices.</p><div class="row"><div class="col-md-3 prod_img"><a href="https://circuitdigest.com/microcontroller-projects/arduino-7-segment-display-clock"><picture><source type="image/webp" srcset="/sites/default/files/styles/cd_webp_720/public/projectimage_mic/Multiplexing-Four-7-Segment-Displays-using-Arduino-to-Display-Time.jpg.webp?itok=AWy4lvDe 720w, /sites/default/files/styles/cd_webp/public/projectimage_mic/Multiplexing-Four-7-Segment-Displays-using-Arduino-to-Display-Time.jpg.webp?itok=cb9pRhv_ 750w" sizes="(max-width: 750px) 100vw, 750px"><img loading="lazy" style="border-radius:8px;object-fit:cover;" src="https://circuitdigest.com/sites/default/files/projectimage_mic/Multiplexing-Four-7-Segment-Displays-using-Arduino-to-Display-Time.jpg" alt="Multiplexing Four 7 Segment Displays using Arduino to Display Time" width="300" height="212" title="Multiplexing Four 7 Segment Displays using Arduino to Display Time"></picture></a></div><div class="col-md-9 prod_con"><p><a style="font-size:18px;" href="https://circuitdigest.com/microcontroller-projects/arduino-7-segment-display-clock">Multiplexing Four 7 Segment Displays using Arduino to Display Time</a></p><p><em>This tutorial is about making a Digital clock by multiplexing four- 7 segment displays using Arduino UNO and displaying the time in HH:MM format.</em></p></div></div><div class="row"><div class="col-md-3 prod_img"><a href="https://circuitdigest.com/microcontroller-projects/making-arduino-based-hourglass-using-led-matrix-displays"><picture><source type="image/webp" srcset="/sites/default/files/styles/cd_webp_720/public/projectimage_mic/Arduino-Hourglass.jpg.webp?itok=y9x-kcH1 720w, /sites/default/files/styles/cd_webp/public/projectimage_mic/Arduino-Hourglass.jpg.webp?itok=WFkbrFD8 750w" sizes="(max-width: 750px) 100vw, 750px"><img loading="lazy" style="border-radius:8px;object-fit:cover;" src="https://circuitdigest.com/sites/default/files/projectimage_mic/Arduino-Hourglass.jpg" alt="Arduino based Hourglass using Accelerometer and DOT Matrix Display" width="300" height="200" title="Arduino based Hourglass using Accelerometer and DOT Matrix Display"></picture></a></div><div class="col-md-9 prod_con"><p><a style="font-size:18px;" href="https://circuitdigest.com/microcontroller-projects/making-arduino-based-hourglass-using-led-matrix-displays">Arduino based Hourglass using Accelerometer and DOT Matrix Display</a></p><p><em>An Arduino hourglass project is a fun and educational project that involves creating a digital hourglass timer using an Arduino microcontroller and some simple electronic components.</em></p></div></div><div class="row"><div class="col-md-3 prod_img"><a href="https://circuitdigest.com/microcontroller-projects/interfacing-tm1637-seven-segment-display-with-arduino"><picture><source type="image/webp" srcset="/sites/default/files/styles/cd_webp_720/public/projectimage_mic/Interfacing-TM1637-Display-Module-with-Arduino.jpg.webp?itok=qgqt00pe 720w, /sites/default/files/styles/cd_webp/public/projectimage_mic/Interfacing-TM1637-Display-Module-with-Arduino.jpg.webp?itok=s0M1ZTdN 750w" sizes="(max-width: 750px) 100vw, 750px"><img loading="lazy" style="border-radius:8px;object-fit:cover;" src="https://circuitdigest.com/sites/default/files/projectimage_mic/Interfacing-TM1637-Display-Module-with-Arduino.jpg" alt="Interfacing TM1637 4 Digit Seven Segment Display Module with Arduino" width="300" height="200" title="Interfacing TM1637 4 Digit Seven Segment Display Module with Arduino"></picture></a></div><div class="col-md-9 prod_con"><p><a style="font-size:18px;" href="https://circuitdigest.com/microcontroller-projects/interfacing-tm1637-seven-segment-display-with-arduino">Interfacing TM1637 4 Digit Seven Segment Display Module with Arduino</a></p><p><em>In this project, we will be using a ready-to-use TM1637 Based 4 Bits Red Digital Tube LED Display Module and will be testing its every feature and also in the end we will give you a working video of the model.&nbsp;</em></p></div></div>
+          </div>
+
+<!-- /21034905/billboard_3 -->
+<div class="billboardbottom" style="overflow:scroll; overflow-x:scroll; -webkit-overflow-scrolling: touch;">
+<div id='div-gpt-ad-1721987993455-0' style='width: 970px; height: 250px;'>
+  <script type="9ed7aeb7ba36c64b3b7181b0-text/javascript">
+    googletag.cmd.push(function() { googletag.display('div-gpt-ad-1721987993455-0'); });
+  </script>
+</div>
+</div>
+
+
+<style>
+.code-block-wrapper h3 {
+ color: #0e3d79;
+ font-size: 24px;
+ margin-top: 20px;
+ margin-bottom: 10px;
+ font-family: inherit;
+ font-weight: 500;
+ line-height: 1.1;
+}
+.code-block-wrapper {
+ margin: 2em 0;
+ position: relative;
+}
+.code-block {
+ margin: 0;
+ position: relative;
+}
+.code-block pre {
+ min-height: 100px;
+ max-height: 600px;
+ overflow-x: auto;
+ margin: 0;
+ padding: 1.5em;
+ background: #1E1E1E;
+ border-radius: 6px;
+ border: 1px solid #333;
+ white-space: pre !important;
+ tab-size: 4;
+ -moz-tab-size: 4;
+ -o-tab-size: 4;
+}
+.code-block code {
+ font-family: 'Consolas', Monaco, 'Andale Mono', monospace;
+ font-size: 15px;
+ line-height: 1.5;
+ color: #D4D4D4;
+ display: block;
+ width: 100%;
+ white-space: pre !important;
+ word-break: keep-all !important;
+ overflow-wrap: normal !important;
+ hyphens: none !important;
+}
+.code-block pre::-webkit-scrollbar {
+ width: 8px;
+ height: 8px;
+}
+.code-block pre::-webkit-scrollbar-track {
+ background: #2c2c2c;
+ border-radius: 4px;
+}
+.code-block pre::-webkit-scrollbar-thumb {
+ background: #666;
+ border-radius: 4px;
+}
+.code-block pre::-webkit-scrollbar-thumb:hover {
+ background: #888;
+}
+/* Copy Button Styles */
+.copy-button {
+ position: absolute;
+ top: 10px;
+ right: 10px;
+ padding: 8px 12px;
+ background: #2e7d32; /* contrast P3 2026-11-16: white text 5.13:1 (was #4CAF50, 2.78:1) */
+ color: white;
+ border: none;
+ border-radius: 4px;
+ cursor: pointer;
+ font-size: 14px;
+ transition: background 0.3s ease;
+ z-index: 10;
+}
+.copy-button:hover {
+ background: #1b5e20;
+}
+.copy-button.copied {
+ background: #1565c0;
+}
+</style>
+
+<div class="code-block-wrapper">
+ <h3><strong>Complete Project Code</strong></h3>
+ <div class="code-block"><button class="copy-button">Copy Code</button>
+     <pre><code class="language-arduino line-numbers"><p class="MsoPlainText"><span style="font-family:&quot;Courier New&quot;;font-size:10.5pt;">#include &lt;Wire.h&gt;
+<p class="MsoPlainText"><span style="font-family:&quot;Courier New&quot;;font-size:10.5pt;">#include &lt;LiquidCrystal.h&gt;
+<p class="MsoPlainText"><span style="font-family:&quot;Courier New&quot;;font-size:10.5pt;">#include &lt;RTClib.h&gt;
+<p class="MsoPlainText"><span style="font-family:&quot;Courier New&quot;;font-size:10.5pt;">DateTime now;
+<p class="MsoPlainText"><span style="font-family:&quot;Courier New&quot;;font-size:10.5pt;">RTC_DS3231 rtc;
+<p class="MsoPlainText"><span style="font-family:&quot;Courier New&quot;;font-size:10.5pt;">LiquidCrystal lcd(7, 6, 5, 4, 3, 2); // (rs, e, d4, d5, d6, d7)
+<p class="MsoPlainText"><span style="font-family:&quot;Courier New&quot;;font-size:10.5pt;">void displayDate(void);
+<p class="MsoPlainText"><span style="font-family:&quot;Courier New&quot;;font-size:10.5pt;">void displayTime(void);
+<p class="MsoPlainText"><span style="font-family:&quot;Courier New&quot;;font-size:10.5pt;">void setup ()
+<p class="MsoPlainText"><span style="font-family:&quot;Courier New&quot;;font-size:10.5pt;">{
+<p class="MsoPlainText"><span style="font-family:&quot;Courier New&quot;;font-size:10.5pt;">&nbsp; Serial.begin(9600);
+<p class="MsoPlainText"><span style="font-family:&quot;Courier New&quot;;font-size:10.5pt;">&nbsp; lcd.begin(16,2);
+<p class="MsoPlainText"><span style="font-family:&quot;Courier New&quot;;font-size:10.5pt;">&nbsp; if (! rtc.begin())
+<p class="MsoPlainText"><span style="font-family:&quot;Courier New&quot;;font-size:10.5pt;">&nbsp; {
+<p class="MsoPlainText"><span style="font-family:&quot;Courier New&quot;;font-size:10.5pt;">&nbsp;&nbsp;&nbsp; Serial.println(" RTC Module not Present");
+<p class="MsoPlainText"><span style="font-family:&quot;Courier New&quot;;font-size:10.5pt;">&nbsp;&nbsp;&nbsp; while (1);
+<p class="MsoPlainText"><span style="font-family:&quot;Courier New&quot;;font-size:10.5pt;">&nbsp; }
+<p class="MsoPlainText"><span style="font-family:&quot;Courier New&quot;;font-size:10.5pt;">&nbsp; if (rtc.lostPower())
+<p class="MsoPlainText"><span style="font-family:&quot;Courier New&quot;;font-size:10.5pt;">&nbsp; {
+<p class="MsoPlainText"><span style="font-family:&quot;Courier New&quot;;font-size:10.5pt;">&nbsp;&nbsp;&nbsp; Serial.println("RTC power failure, reset the time!");
+<p class="MsoPlainText"><span style="font-family:&quot;Courier New&quot;;font-size:10.5pt;">&nbsp;&nbsp;&nbsp; rtc.adjust(DateTime(F(__DATE__), F(__TIME__)));
+<p class="MsoPlainText"><span style="font-family:&quot;Courier New&quot;;font-size:10.5pt;">&nbsp; }
+<p class="MsoPlainText"><span style="font-family:&quot;Courier New&quot;;font-size:10.5pt;">}
+<p class="MsoPlainText"><span style="font-family:&quot;Courier New&quot;;font-size:10.5pt;">void loop ()
+<p class="MsoPlainText"><span style="font-family:&quot;Courier New&quot;;font-size:10.5pt;">{
+<p class="MsoPlainText"><span style="font-family:&quot;Courier New&quot;;font-size:10.5pt;">&nbsp; now = rtc.now();
+<p class="MsoPlainText"><span style="font-family:&quot;Courier New&quot;;font-size:10.5pt;">&nbsp; displayDate();
+<p class="MsoPlainText"><span style="font-family:&quot;Courier New&quot;;font-size:10.5pt;">&nbsp; displayTime();
+<p class="MsoPlainText"><span style="font-family:&quot;Courier New&quot;;font-size:10.5pt;">}
+<p class="MsoPlainText"><span style="font-family:&quot;Courier New&quot;;font-size:10.5pt;">&nbsp;void displayDate()
+<p class="MsoPlainText"><span style="font-family:&quot;Courier New&quot;;font-size:10.5pt;">&nbsp;{
+<p class="MsoPlainText"><span style="font-family:&quot;Courier New&quot;;font-size:10.5pt;">&nbsp; lcd.setCursor(0,0);
+<p class="MsoPlainText"><span style="font-family:&quot;Courier New&quot;;font-size:10.5pt;">&nbsp; lcd.print("Date:");
+<p class="MsoPlainText"><span style="font-family:&quot;Courier New&quot;;font-size:10.5pt;">&nbsp; lcd.print(now.day());
+<p class="MsoPlainText"><span style="font-family:&quot;Courier New&quot;;font-size:10.5pt;">&nbsp; lcd.print('/');
+<p class="MsoPlainText"><span style="font-family:&quot;Courier New&quot;;font-size:10.5pt;">&nbsp; lcd.print(now.month());
+<p class="MsoPlainText"><span style="font-family:&quot;Courier New&quot;;font-size:10.5pt;">&nbsp; lcd.print('/');
+<p class="MsoPlainText"><span style="font-family:&quot;Courier New&quot;;font-size:10.5pt;">&nbsp; lcd.print(now.year());
+<p class="MsoPlainText"><span style="font-family:&quot;Courier New&quot;;font-size:10.5pt;">&nbsp;}
+<p class="MsoPlainText"><span style="font-family:&quot;Courier New&quot;;font-size:10.5pt;">&nbsp;void displayTime()
+<p class="MsoPlainText"><span style="font-family:&quot;Courier New&quot;;font-size:10.5pt;">&nbsp;{
+<p class="MsoPlainText"><span style="font-family:&quot;Courier New&quot;;font-size:10.5pt;">&nbsp; lcd.setCursor(0,1);
+<p class="MsoPlainText"><span style="font-family:&quot;Courier New&quot;;font-size:10.5pt;">&nbsp; lcd.print("Time:");
+<p class="MsoPlainText"><span style="font-family:&quot;Courier New&quot;;font-size:10.5pt;">&nbsp; lcd.print(now.hour());
+<p class="MsoPlainText"><span style="font-family:&quot;Courier New&quot;;font-size:10.5pt;">&nbsp; lcd.print(':');
+<p class="MsoPlainText"><span style="font-family:&quot;Courier New&quot;;font-size:10.5pt;">&nbsp; lcd.print(now.minute());
+<p class="MsoPlainText"><span style="font-family:&quot;Courier New&quot;;font-size:10.5pt;">&nbsp; lcd.print(':');
+<p class="MsoPlainText"><span style="font-family:&quot;Courier New&quot;;font-size:10.5pt;">&nbsp; lcd.print(now.second());
+<p class="MsoPlainText"><span style="font-family:&quot;Courier New&quot;;font-size:10.5pt;">&nbsp; lcd.print("&nbsp;&nbsp;&nbsp; ");
+<p class="MsoPlainText"><span style="font-family:&quot;Courier New&quot;;font-size:10.5pt;">&nbsp;}
+<p class="MsoPlainText">&nbsp;
+<p class="MsoPlainText">To set the Time
+<p class="MsoPlainText"><span style="font-family:&quot;Courier New&quot;;font-size:10.5pt;">#include &lt;RTClib.h&gt;
+<p class="MsoPlainText"><span style="font-family:&quot;Courier New&quot;;font-size:10.5pt;">#include &lt;Wire.h&gt;
+<p class="MsoPlainText"><span style="font-family:&quot;Courier New&quot;;font-size:10.5pt;">RTC_DS3231 rtc;
+<p class="MsoPlainText"><span style="font-family:&quot;Courier New&quot;;font-size:10.5pt;">char t[32];
+<p class="MsoPlainText"><span style="font-family:&quot;Courier New&quot;;font-size:10.5pt;">void setup()
+<p class="MsoPlainText"><span style="font-family:&quot;Courier New&quot;;font-size:10.5pt;">{
+<p class="MsoPlainText"><span style="font-family:&quot;Courier New&quot;;font-size:10.5pt;">&nbsp; Serial.begin(9600);
+<p class="MsoPlainText"><span style="font-family:&quot;Courier New&quot;;font-size:10.5pt;">&nbsp; Wire.begin();
+<p class="MsoPlainText"><span style="font-family:&quot;Courier New&quot;;font-size:10.5pt;">&nbsp; rtc.begin();
+<p class="MsoPlainText"><span style="font-family:&quot;Courier New&quot;;font-size:10.5pt;">&nbsp; rtc.adjust(DateTime(F(__DATE__),F(__TIME__)));
+<p class="MsoPlainText"><span style="font-family:&quot;Courier New&quot;;font-size:10.5pt;">&nbsp; //rtc.adjust(DateTime(2014, 1, 21, 3, 0, 0));
+<p class="MsoPlainText"><span style="font-family:&quot;Courier New&quot;;font-size:10.5pt;">}
+<p class="MsoPlainText"><span style="font-family:&quot;Courier New&quot;;font-size:10.5pt;">void loop()
+<p class="MsoPlainText"><span style="font-family:&quot;Courier New&quot;;font-size:10.5pt;">{
+<p class="MsoPlainText"><span style="font-family:&quot;Courier New&quot;;font-size:10.5pt;">&nbsp; DateTime now = rtc.now();
+<p class="MsoPlainText"><span style="font-family:&quot;Courier New&quot;;font-size:10.5pt;">&nbsp; sprintf(t, "%02d:%02d:%02d %02d/%02d/%02d",&nbsp; now.hour(), now.minute(), now.second(), now.day(), now.month(), now.year());&nbsp;&nbsp;
+<p class="MsoPlainText"><span style="font-family:&quot;Courier New&quot;;font-size:10.5pt;">&nbsp; Serial.print(F("Date/Time: "));
+<p class="MsoPlainText"><span style="font-family:&quot;Courier New&quot;;font-size:10.5pt;">&nbsp; Serial.println(t);
+<p class="MsoPlainText"><span style="font-family:&quot;Courier New&quot;;font-size:10.5pt;">&nbsp; delay(1000);
+<p class="MsoPlainText"><span style="font-family:&quot;Courier New&quot;;font-size:10.5pt;">}
+</code></pre></div>
+</div>
+
+<script type="9ed7aeb7ba36c64b3b7181b0-text/javascript">
+(function() {
+ document.addEventListener('DOMContentLoaded', function() {
+   document.querySelectorAll('.code-block code').forEach(function(element) {
+     let content = element.innerHTML;
+     
+     // Remove only specific HTML tags
+     content = content.replace(/<\/?(?:p|br|div|span)\/?>/g, '');
+     
+     // Replace common HTML entities
+     content = content.replace(/&nbsp;/g, ' ');
+     content = content.replace(/&amp;/g, '&');
+     
+     // Clean up multiple newlines
+     content = content.replace(/\n\s*\n/g, '\n');
+     
+     element.innerHTML = content;
+   });
+
+   document.querySelectorAll('.copy-button').forEach(function(button) {
+     button.addEventListener('click', function() {
+       const pre = this.nextElementSibling;
+       const code = pre.querySelector('code');
+       const textContent = code.textContent || code.innerText;
+       
+       navigator.clipboard.writeText(textContent.trim()).then(function() {
+         button.textContent = 'Copied!';
+         button.classList.add('copied');
+         
+         setTimeout(function() {
+           button.textContent = 'Copy Code';
+           button.classList.remove('copied');
+         }, 2000);
+       }).catch(function(err) {
+         console.error('Failed to copy:', err);
+         button.textContent = 'Failed to copy';
+       });
+     });
+   });
+ });
+})();
+</script>
+  <div class="field field--name-field-tags field--type-entity-reference field--label-above">
+    <div class="field--label">Tags</div>
+          <div class="field--items">
+              <div class="field--item"><a href="/tags/arduino-tutorial" hreflang="en">arduino tutorial</a></div>
+          <div class="field--item"><a href="/tags/interfacing" hreflang="en">interfacing</a></div>
+          <div class="field--item"><a href="/tags/rtc" hreflang="en">RTC</a></div>
+          <div class="field--item"><a href="/tags/digital-clock" hreflang="en">digital clock</a></div>
+          <div class="field--item"><a href="/tags/arduino" hreflang="en">arduino</a></div>
+          <div class="field--item"><a href="/tags/arduino-tutorials" hreflang="en">Arduino tutorials</a></div>
+          <div class="field--item"><a href="/tags/gps" hreflang="en">GPS</a></div>
+          <div class="field--item"><a href="/tags/automation" hreflang="en">Automation</a></div>
+          <div class="field--item"><a href="/tags/i2c" hreflang="en">I2C</a></div>
+          <div class="field--item"><a href="/tags/i2c-communication" hreflang="en">I2C Communication</a></div>
+          <div class="field--item"><a href="/tags/clock" hreflang="en">clock</a></div>
+          <div class="field--item"><a href="/tags/microcontroller" hreflang="en">microcontroller</a></div>
+          <div class="field--item"><a href="/tags/resistors" hreflang="en">Resistors</a></div>
+          <div class="field--item"><a href="/tags/capacitors" hreflang="en">capacitors</a></div>
+              </div>
+      </div>
+
+
+
+<div class="field field--name-field-tags field--type-entity-reference field--label-above " style="margin-bottom: 30px;margin-top: 30px;">
+  <div class="field--label">Have any question related to this Article?</div>
+  <div class="cd-discussion-row">
+    <div class="cd-discussion-label" style="padding-right: 15px;">
+      <div class="head-article" style="margin: 0;">Start a Discussion on:</div>
+    </div>
+    <div class="field--item community-icon-p" style="">
+      <a href="https://chat.whatsapp.com/L79JMpehN63KCiBPNRwske" hreflang="en" target="_blank" rel="noopener" aria-label="Join our WhatsApp community for discussions">
+        <svg class="community_icon" viewBox="0 0 40 40" width="40" height="40" aria-hidden="true" focusable="false"><circle cx="20" cy="20" r="20" fill="#25D366"/><g transform="translate(10 10) scale(0.8333)" fill="#fff"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></g></svg>
+        <div class="community-link">WhatsApp</div>
+      </a>
+    </div>
+    <div class="field--item community-icon-p">
+      <a href="https://t.me/circuitdigest" hreflang="en" target="_blank" rel="noopener" aria-label="Join our Telegram channel for discussions">
+        <svg class="community_icon" viewBox="0 0 40 40" width="40" height="40" aria-hidden="true" focusable="false"><circle cx="20" cy="20" r="20" fill="#26A5E4"/><g transform="translate(10 10) scale(0.8333)" fill="#fff"><path d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z"/></g></svg>
+        <div class="community-link">Telegram</div>
+      </a>
+    </div>
+    <div class="field--item community-icon-p">
+      <a href="https://discord.com/invite/UXJrFJSWpz" hreflang="en" target="_blank" rel="noopener" aria-label="Join our Discord server for discussions">
+        <svg class="community_icon" viewBox="0 0 40 40" width="40" height="40" aria-hidden="true" focusable="false"><circle cx="20" cy="20" r="20" fill="#5865F2"/><g transform="translate(9.5 11.5) scale(0.875)" fill="#fff"><path d="M20.317 4.3698a19.7913 19.7913 0 00-4.8851-1.5152.0741.0741 0 00-.0785.0371c-.211.3753-.4447.8648-.6083 1.2495-1.8447-.2762-3.68-.2762-5.4868 0-.1636-.3933-.4058-.8742-.6177-1.2495a.077.077 0 00-.0785-.037 19.7363 19.7363 0 00-4.8852 1.515.0699.0699 0 00-.0321.0277C.5334 9.0458-.319 13.5799.0992 18.0578a.0824.0824 0 00.0312.0561c2.0528 1.5076 4.0413 2.4228 5.9929 3.0294a.0777.0777 0 00.0842-.0276c.4616-.6304.8731-1.2952 1.226-1.9942a.076.076 0 00-.0416-.1057c-.6528-.2476-1.2743-.5495-1.8722-.8923a.077.077 0 01-.0076-.1277c.1258-.0943.2517-.1923.3718-.2914a.0743.0743 0 01.0776-.0105c3.9278 1.7933 8.18 1.7933 12.0614 0a.0739.0739 0 01.0785.0095c.1202.099.246.1981.3728.2924a.077.077 0 01-.0066.1276 12.2986 12.2986 0 01-1.873.8914.0766.0766 0 00-.0407.1067c.3604.698.7719 1.3628 1.225 1.9932a.076.076 0 00.0842.0286c1.961-.6067 3.9495-1.5219 6.0023-3.0294a.077.077 0 00.0313-.0552c.5004-5.177-.8382-9.6739-3.5485-13.6604a.061.061 0 00-.0312-.0286zM8.02 15.3312c-1.1825 0-2.1569-1.0857-2.1569-2.419 0-1.3332.9555-2.4189 2.157-2.4189 1.2108 0 2.1757 1.0952 2.1568 2.419 0 1.3332-.9555 2.4189-2.1569 2.4189zm7.9748 0c-1.1825 0-2.1569-1.0857-2.1569-2.419 0-1.3332.9554-2.4189 2.1569-2.4189 1.2108 0 2.1757 1.0952 2.1568 2.419 0 1.3332-.946 2.4189-2.1568 2.4189Z"/></g></svg>
+        <div class="community-link">Discord</div>
+      </a>
+    </div>
+    <div class="field--item community-icon-p">
+      <a href="https://circuitdigest.com/forum" hreflang="en" target="_blank" rel="noopener" aria-label="Visit our community Forum for discussions">
+        <svg class="community_icon" viewBox="0 0 40 40" width="40" height="40" aria-hidden="true" focusable="false"><circle cx="20" cy="20" r="20" fill="#0e3d79"/><g transform="translate(10 10) scale(0.8333)" fill="#fff"><path d="M21 6h-2v9H6v2c0 .55.45 1 1 1h11l4 4V7c0-.55-.45-1-1-1zm-4 6V3c0-.55-.45-1-1-1H3c-.55 0-1 .45-1 1v14l4-4h10c.55 0 1-.45 1-1z"/></g></svg>
+        <div class="community-link">Forum</div>
+      </a>
+    </div>
+  </div>
+</div>
+
+
+<section class="cd-comments">
+      
+    <h2 class="cd-comments__title">
+      Comments
+              <span class="cd-comments__count">1</span>
+          </h2>
+    
+  
+          <div class="cd-comments__list">
+      
+
+<article data-comment-user-id="90538" id="comment-36079" class="js-comment cd-comment"
+         itemscope itemtype="https://schema.org/Comment">
+
+      <meta itemprop="url" content="https://circuitdigest.com/microcontroller-projects/interfacing-ds3231-rtc-with-arduino-and-diy-digital-clock#comment-36079">
+  
+    <mark class="hidden" data-comment-timestamp="1685963157"></mark>
+
+  <span class="cd-comment__avatar" aria-hidden="true">A</span>
+
+  <div class="cd-comment__main">
+        <div class="cd-comment__bubble">
+              <footer class="cd-comment__head">
+          <span class="cd-comment__author" itemprop="author" itemscope itemtype="https://schema.org/Person">
+                        <span itemprop="name"><a title="View user profile." href="/users/akinfemisoyeifedayogmailcom">akinfemisoye ifedayo</a></span>
+          </span>
+          
+                            </footer>
+      
+      <div class="cd-comment__body" itemprop="text">
+        
+            <div class="field field--name-comment-body field--type-text-long field--label-hidden field--item"><p>of what essence is the EEPROM. will the ds3231 still function if i reove it?</p>
+<p>&nbsp;</p>
+</div>
+      
+      </div>
+    </div>
+
+    <div class="cd-comment__meta">
+              <time class="cd-comment__date" datetime="2023-06-05T16:35:57+05:30" itemprop="dateCreated">Jun 5, 2023</time>
+                    <span class="cd-comment__actions"></span>
+          </div>
+  </div>
+</article>
+
+    </div>
+  
+      
+      <div class="cd-comments__form">
+      <h3 class="cd-comments__form-title">Add a comment</h3>
+              <p class="cd-comments__note">No account needed. Your comment appears once a moderator has reviewed it.</p>
+            <form class="comment-comment-node-microcontroller-form comment-form" data-user-info-from-browser data-drupal-selector="comment-form" action="/comment/reply/node/20899/comment_node_microcontroller" method="post" id="comment-form" accept-charset="UTF-8">
+  <div class="form-item js-form-item form-type-textfield js-form-type-textfield form-item-name js-form-item-name form-group">
+      <label for="edit-name" class="control-label js-form-required form-required">Your name</label>
+  
+  
+  <input data-drupal-default-value="Anonymous" data-drupal-selector="edit-name" class="form-text required form-control" type="text" id="edit-name" name="name" value="" size="30" maxlength="60" placeholder="Your name" required="required" aria-required="true" />
+
+  
+  
+  </div>
+<div class="form-item js-form-item form-type-email js-form-type-email form-item-mail js-form-item-mail form-group">
+      <label for="edit-mail" class="control-label js-form-required form-required">Email</label>
+  
+  
+  <input data-drupal-selector="edit-mail" aria-describedby="edit-mail--description" class="form-email required form-control" type="email" id="edit-mail" name="mail" value="" size="30" maxlength="64" placeholder="you@example.com" required="required" aria-required="true" />
+
+  
+  
+      <div id="edit-mail--description" class="description help-block">
+      Never shown publicly.
+    </div>
+  </div>
+<div class="field--type-text-long field--name-comment-body field--widget-text-textarea form-group js-form-wrapper form-wrapper" data-drupal-selector="edit-comment-body-wrapper" id="edit-comment-body-wrapper">      <div class="js-text-format-wrapper text-format-wrapper js-form-item form-item">
+  <div class="form-item js-form-item form-type-textarea js-form-type-textarea form-item-comment-body-0-value js-form-item-comment-body-0-value">
+      <label for="edit-comment-body-0-value" class="control-label js-form-required form-required">Comment</label>
+  
+  
+  <div class="form-textarea-wrapper">
+  <textarea class="js-text-full text-full form-textarea required form-control resize-vertical" data-media-embed-host-entity-langcode="en" data-drupal-selector="edit-comment-body-0-value" id="edit-comment-body-0-value" name="comment_body[0][value]" rows="5" cols="60" placeholder="Share a question, a tip or your own results..." required="required" aria-required="true"></textarea>
+</div>
+
+
+  
+  
+  </div>
+<div class="js-filter-wrapper filter-wrapper form-inline form-group js-form-wrapper form-wrapper" data-drupal-selector="edit-comment-body-0-format" id="edit-comment-body-0-format"><div class="filter-help form-group js-form-wrapper form-wrapper" data-drupal-selector="edit-comment-body-0-format-help" id="edit-comment-body-0-format-help"><a href="/filter/tips" target="_blank" title="Opens in new window" data-toggle="tooltip" data-drupal-selector="edit-comment-body-0-format-help-about" class="icon-before" id="edit-comment-body-0-format-help-about"><span class="icon glyphicon glyphicon-question-sign" aria-hidden="true"></span>About text formats</a></div>
+</div>
+
+  </div>
+
+  </div>
+<input data-drupal-selector="form-34ifv8-psnqsekt6pekhqxkhzur8l1yk7ngfshexbxc" type="hidden" name="form_build_id" value="form-34IfV8_pSnQsEKt6pEkHqXKHzUr8L1yK7ngFSHEXBXc" /><input data-drupal-selector="edit-comment-comment-node-microcontroller-form" type="hidden" name="form_id" value="comment_comment_node_microcontroller_form" /><div class="field--type-language field--name-langcode field--widget-language-select form-group js-form-wrapper form-wrapper" data-drupal-selector="edit-langcode-wrapper" id="edit-langcode-wrapper">      
+  </div>
+
+
+                    <fieldset  data-drupal-selector="edit-captcha" class="captcha captcha-type-challenge--recaptcha">
+          <legend class="captcha__title js-form-required form-required">
+            CAPTCHA
+          </legend>
+                  <div class="captcha__element">
+            <input data-drupal-selector="edit-captcha-sid" type="hidden" name="captcha_sid" value="8009802" /><input data-drupal-selector="edit-captcha-token" type="hidden" name="captcha_token" value="g_AH9cz4evr8PfopDsTwE-uE8yutihc3L2YqLacuhyE" /><input data-drupal-selector="edit-captcha-response" type="hidden" name="captcha_response" value="" /><div class="g-recaptcha" data-sitekey="6LeJe4QUAAAAAL5vaIGMRHP5ToMHLiMu-A4DfPgs" data-theme="light" data-type="image"></div><input data-drupal-selector="edit-captcha-cacheable" type="hidden" name="captcha_cacheable" value="1" />
+          </div>
+                      <div class="captcha__description description">This question is for testing whether or not you are a human visitor and to prevent automated spam submissions.</div>
+                          </fieldset>
+            <div data-drupal-selector="edit-actions" class="form-actions form-group js-form-wrapper form-wrapper" id="edit-actions"><button data-drupal-selector="edit-submit" class="button button--primary js-form-submit form-submit btn-primary btn" type="submit" id="edit-submit" name="op" value="Post comment">Post comment</button></div>
+
+</form>
+
+              <div class="cd-comments__login">
+          <span class="cd-comments__or">Or sign in with</span>
+                  <a href="/user/login/google?destination=/microcontroller-projects/interfacing-ds3231-rtc-with-arduino-and-diy-digital-clock" rel="nofollow" class="cd-login">
+          <span class="cd-g" aria-hidden="true"></span>Google
+        </a>
+        <a href="/user/login/facebook?destination=/microcontroller-projects/interfacing-ds3231-rtc-with-arduino-and-diy-digital-clock" rel="nofollow" class="cd-login">
+          <svg width="16" height="16" viewBox="0 0 24 24" aria-hidden="true"><path fill="#1877F2" d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>Facebook
+        </a>
+        <a href="/user/login/github?destination=/microcontroller-projects/interfacing-ds3231-rtc-with-arduino-and-diy-digital-clock" rel="nofollow" class="cd-login">
+          <svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path fill="#24292E" d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z"/></svg>GitHub
+        </a>
+  
+        </div>
+          </div>
+  </section>
+
+
+
+
+<ul class="links inline list-inline"><li class="comment-add"><a href="/microcontroller-projects/interfacing-ds3231-rtc-with-arduino-and-diy-digital-clock#comment-form" title="Share your thoughts and opinions." hreflang="en">Add new comment</a></li></ul>
+
+<style type="text/css">
+.community-link{
+  color: #666666;
+  font-size: 13px;
+  text-transform: uppercase;
+}
+.community_icon:hover{
+opacity: 0.7;
+}
+.community-link:hover{
+color:#0e3d79;
+}
+.community-icon-p{
+  padding: 5px 5px !important;
+  background: none !important;
+}
+.head-article{
+  font-size: 20px;color: #4d4d4d;margin-bottom: 20px;
+}
+@media only screen and (max-width: 361px) {
+  .community-link {
+    font-size: 10px;
+  }
+  .head-article{
+    font-size: 18px;
+    margin-bottom: 12px;
+  }
+  .community_icon{
+    width:30px;
+  }
+}
+</style>
+
+
+
+
+
+  </div>
+
+</article>
+
+
+  </div>
+
+              </section>
+
+                              <aside class="col-sm-3" role="complementary">
+              <div class="region region-sidebar-second">
+    <section class="views-element-container block block-views block-views-blockti-videos-block-20 clearfix" id="block-views-block-ti-videos-block-20">
+  
+    
+
+      <div class="form-group"><div class="post-style-list view view-ti-videos view-id-ti_videos view-display-id-block_20 js-view-dom-id-809c5619a01fe4c781c8b999633da11431f6f77c6142d561c6f7a0d1c3ee9b9a">
+  
+    
+      <div class="view-header">
+      <!-- /21034905/track_imp_1x1 --><div id="div-gpt-ad-1572871798331-0" style="width: 1px; height: 1px;">
+<script type="9ed7aeb7ba36c64b3b7181b0-text/javascript">
+    googletag.cmd.push(function() { googletag.display('div-gpt-ad-1572871798331-0'); });
+  </script></div>
+<p><img width="100%" src="/sites/default/files/Digikey-featuredProducts.jpg" alt="DigiKey featured products logo"></p>
+
+    </div>
+      
+      <div class="view-content">
+        <div class="table-responsive">
+<table class="table table-hover table-striped">
+      <tbody>
+      <tr>
+                                                                      <td class="views-field views-field-field-image views-align-left"><a href="https://bit.ly/4irslwm
+" rel="nofollow" target="_blank">  <img loading="lazy" src="/sites/default/files/styles/medium/public/TI_video/New%20Project.jpg?itok=Ns8UfYyS" width="200" height="200" alt="Johanson Technology Multi-Layer High-Q SMD Capacitors" title="Johanson Technology Multi-Layer High-Q SMD Capacitors" class="img-responsive" />
+
+
+</a>        </td>
+                                                                                            <td class="views-field views-field-title views-align-left views-field-body"><a href="https://bit.ly/4irslwm
+" rel="nofollow" target="_blank">Johanson Technology Multi-Layer High-Q SMD Capacitors</a><br /><p>Watch a quick overview of High-Q capacitor key specs and benefits for RF and microwave designs</p>
+        </td>
+          </tr>
+      <tr>
+                                                                      <td class="views-field views-field-field-image views-align-left"><a href="https://bit.ly/4eGKQfb
+" rel="nofollow" target="_blank">  <img loading="lazy" src="/sites/default/files/styles/medium/public/TI_video/New%20Project%20%281%29_1.jpg?itok=Qarv8l87" width="133" height="200" alt="1555F Series IP68 Wall Mounted Enclosures for Harsh Environments" title="1555F Series IP68 Wall Mounted Enclosures for Harsh Environments" class="img-responsive" />
+
+
+</a>        </td>
+                                                                                            <td class="views-field views-field-title views-align-left views-field-body"><a href="https://bit.ly/4eGKQfb
+" rel="nofollow" target="_blank">1555F Series IP68 Wall Mounted Enclosures for Harsh Environments</a><br /><p>Enclosures with mounting flanges ideal for housing electronic devices in industrial environments</p>
+        </td>
+          </tr>
+      <tr>
+                                                                      <td class="views-field views-field-field-image views-align-left"><a href="https://bit.ly/4ifxysu
+" rel="nofollow" target="_blank">  <img loading="lazy" src="/sites/default/files/styles/medium/public/TI_video/New%20Project%20%282%29_0.jpg?itok=DGqRjROK" width="200" height="188" alt="AIROC™ CYW55913/2/1 Connected MCU" title="AIROC™ CYW55913/2/1 Connected MCU" class="img-responsive" />
+
+
+</a>        </td>
+                                                                                            <td class="views-field views-field-title views-align-left views-field-body"><a href="https://bit.ly/4ifxysu
+" rel="nofollow" target="_blank">AIROC™ CYW55913/2/1 Connected MCU</a><br /><p>Redefining Connectivity: AIROC™ CYW55913 modules for IoT, Smart Home, Industrial</p>
+        </td>
+          </tr>
+      <tr>
+                                                                      <td class="views-field views-field-field-image views-align-left"><a href="https://bit.ly/4zkz6HG
+" rel="nofollow" target="_blank">  <img loading="lazy" src="/sites/default/files/styles/medium/public/TI_video/New%20Project%20%283%29_0.jpg?itok=M9pxmyE9" width="200" height="132" alt="TMF882x Series Optical Distance Sensors" title="TMF882x Series Optical Distance Sensors" class="img-responsive" />
+
+
+</a>        </td>
+                                                                                            <td class="views-field views-field-title views-align-left views-field-body"><a href="https://bit.ly/4zkz6HG
+" rel="nofollow" target="_blank">TMF882x Series Optical Distance Sensors</a><br /><p>TMF8829 multi-zone time-of-flight sensor for high-performance proximity &amp; distance measurement</p>
+        </td>
+          </tr>
+      <tr>
+                                                                      <td class="views-field views-field-field-image views-align-left"><a href="https://bit.ly/4e5ONtH
+" rel="nofollow" target="_blank">  <img loading="lazy" src="/sites/default/files/styles/medium/public/TI_video/New%20Project%20%285%29.jpg?itok=yX5n0pax" width="200" height="148" alt="Black Plated RF Connectors and Adapters" title="Black Plated RF Connectors and Adapters" class="img-responsive" />
+
+
+</a>        </td>
+                                                                                            <td class="views-field views-field-title views-align-left views-field-body"><a href="https://bit.ly/4e5ONtH
+" rel="nofollow" target="_blank">Black Plated RF Connectors and Adapters</a><br /><p>Industrial plating option with enhanced durability for a variety of harsh environments</p>
+        </td>
+          </tr>
+      <tr>
+                                                                      <td class="views-field views-field-field-image views-align-left"><a href="https://bit.ly/4sFsn8M
+" rel="nofollow" target="_blank">  <img loading="lazy" src="/sites/default/files/styles/medium/public/TI_video/New%20Project%20%286%29.jpg?itok=SsU_aX0C" width="200" height="179" alt="RL78/G16 16 MHz MCU for Capacitive Touch" title="RL78/G16 16 MHz MCU for Capacitive Touch" class="img-responsive" />
+
+
+</a>        </td>
+                                                                                            <td class="views-field views-field-title views-align-left views-field-body"><a href="https://bit.ly/4sFsn8M
+" rel="nofollow" target="_blank">RL78/G16 16 MHz MCU for Capacitive Touch</a><br /><p>Optimized with highly sensitive cap touch sensors, extensive peripheral circuits and 125℃ operation</p>
+        </td>
+          </tr>
+      <tr>
+                                                                      <td class="views-field views-field-field-image views-align-left"><a href="https://bit.ly/4BBkntp
+" rel="nofollow" target="_blank">  <img loading="lazy" src="/sites/default/files/styles/medium/public/TI_video/New%20Project%20%287%29.jpg?itok=CNv60utR" width="200" height="87" alt="High-Performance Safety-Certified Capacitors" title="High-Performance Safety-Certified Capacitors" class="img-responsive" />
+
+
+</a>        </td>
+                                                                                            <td class="views-field views-field-title views-align-left views-field-body"><a href="https://bit.ly/4BBkntp
+" rel="nofollow" target="_blank">High-Performance Safety-Certified Capacitors</a><br /><p>Ideal solution for ensuring safe operation of high-power AC/DC converter</p>
+        </td>
+          </tr>
+      <tr>
+                                                                      <td class="views-field views-field-field-image views-align-left"><a href="https://bit.ly/4szKzR8
+" rel="nofollow" target="_blank">  <img loading="lazy" src="/sites/default/files/styles/medium/public/TI_video/New%20Project%20%288%29_0.jpg?itok=rOO05AVS" width="200" height="109" alt="Automotive PCB Mount Relay - EP1/EP2 Series" title="Automotive PCB Mount Relay - EP1/EP2 Series" class="img-responsive" />
+
+
+</a>        </td>
+                                                                                            <td class="views-field views-field-title views-align-left views-field-body"><a href="https://bit.ly/4szKzR8
+" rel="nofollow" target="_blank">Automotive PCB Mount Relay - EP1/EP2 Series</a><br /><p>KEMET's automotive PCB-mount relays unique structure offers high performance and productivity</p>
+        </td>
+          </tr>
+    </tbody>
+</table>
+  </div>
+
+    </div>
+  
+          </div>
+</div>
+
+  </section>
+
+<section id="block-block-content-75e03481-bb76-47f0-852d-a7c197b63bdd" class="block block-block-content block-block-content75e03481-bb76-47f0-852d-a7c197b63bdd clearfix">
+  
+    
+
+      
+            <div class="field field--name-body field--type-text-with-summary field--label-hidden field--item"><!-- /21034905/boombox2 --><p></p><center>
+<p></p></center>
+</div>
+      
+  </section>
+
+<section id="block-block-content-0f103afb-e8f0-401e-bfde-837555e5c4a1" class="block block-block-content block-block-content0f103afb-e8f0-401e-bfde-837555e5c4a1 clearfix">
+  
+    
+
+      
+            <div class="field field--name-body field--type-text-with-summary field--label-hidden field--item"><div class="cd-rail-float"><center>
+<!-- /21034905/cd_half_page_ad --><div id="div-gpt-ad-1593583401069-0" style="width: 300px; height: 600px;">
+<script type="9ed7aeb7ba36c64b3b7181b0-text/javascript">
+    googletag.cmd.push(function() { googletag.display('div-gpt-ad-1593583401069-0'); });
+  </script></div>
+<p></p></center>
+<div class="cd-rail-follow">
+<div class="cd-rail-follow__title">Follow Us</div>
+<div class="cd-rail-follow__icons">
+<a href="https://www.whatsapp.com/channel/0029VaHpKHL4dTnG10R0h40u" target="_blank" rel="noopener" aria-label="WhatsApp">
+<svg width="40" height="40" viewBox="0 0 40 40" aria-hidden="true" focusable="false"><circle cx="20" cy="20" r="20" fill="#25D366" /><g transform="translate(10 10) scale(0.8333)" fill="#fff"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z" /></g></svg><p></p></a><br>
+<a href="https://www.instagram.com/circuit_digest/" target="_blank" rel="noopener" aria-label="Instagram">
+<svg width="40" height="40" viewBox="0 0 40 40" aria-hidden="true" focusable="false"><circle cx="20" cy="20" r="20" fill="#E4405F" /><g transform="translate(10 10) scale(0.8333)" fill="#fff"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z" /></g></svg><p></p></a><br>
+<a href="https://www.facebook.com/circuitdigest/" target="_blank" rel="noopener" aria-label="Facebook">
+<svg width="40" height="40" viewBox="0 0 40 40" aria-hidden="true" focusable="false"><circle cx="20" cy="20" r="20" fill="#1877F2" /><g transform="translate(10 10) scale(0.8333)" fill="#fff"><path d="M13.397 20.997v-8.196h2.765l.411-3.209h-3.176V7.548c0-.926.258-1.56 1.587-1.56h1.684V3.127A22.336 22.336 0 0014.201 3c-2.444 0-4.122 1.492-4.122 4.231v2.355H7.332v3.209h2.753v8.202h3.312z" /></g></svg><p></p></a><br>
+<a href="https://twitter.com/CircuitDigest" target="_blank" rel="noopener" aria-label="X">
+<svg width="40" height="40" viewBox="0 0 40 40" aria-hidden="true" focusable="false"><circle cx="20" cy="20" r="20" fill="#000000" /><g transform="translate(10 10) scale(0.8333)" fill="#fff"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" /></g></svg><p></p></a><br>
+<a href="https://www.youtube.com/channel/UCy3CUAIYgZdAOG9k3IPdLmw" target="_blank" rel="noopener" aria-label="YouTube">
+<svg width="40" height="40" viewBox="0 0 40 40" aria-hidden="true" focusable="false"><circle cx="20" cy="20" r="20" fill="#FF0000" /><g transform="translate(10 10) scale(0.8333)" fill="#fff"><path d="M23.498 6.186a3.016 3.016 0 00-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 00.502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 002.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 002.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z" /></g></svg><p></p></a><br>
+<a href="https://www.linkedin.com/company/circuit-digest/" target="_blank" rel="noopener" aria-label="LinkedIn">
+<svg width="40" height="40" viewBox="0 0 40 40" aria-hidden="true" focusable="false"><circle cx="20" cy="20" r="20" fill="#0A66C2" /><g transform="translate(10 10) scale(0.8333)" fill="#fff"><path d="M4.98 3.5c0 1.381-1.11 2.5-2.48 2.5S0 4.881 0 3.5 1.11 1 2.5 1s2.48 1.119 2.48 2.5zM.02 8h4.94v16H.02V8zm7.98 0h4.73v2.2h.07c.66-1.25 2.27-2.57 4.67-2.57 5 0 5.92 3.29 5.92 7.57V24h-4.94v-7.6c0-1.81-.03-4.14-2.52-4.14-2.52 0-2.91 1.97-2.91 4v7.74H8V8z" /></g></svg><p></p></a><br>
+<a href="https://in.pinterest.com/circuitdigest/" target="_blank" rel="noopener" aria-label="Pinterest">
+<svg width="40" height="40" viewBox="0 0 40 40" aria-hidden="true" focusable="false"><circle cx="20" cy="20" r="20" fill="#E60023" /><g transform="translate(10 10) scale(1.25)" fill="#fff"><path d="M8 0a8 8 0 0 0-2.915 15.452c-.07-.633-.134-1.606.027-2.297.146-.625.938-3.977.938-3.977s-.239-.479-.239-1.187c0-1.113.645-1.943 1.448-1.943.682 0 1.012.512 1.012 1.127 0 .686-.437 1.712-.663 2.663-.188.796.4 1.446 1.185 1.446 1.422 0 2.515-1.5 2.515-3.664 0-1.915-1.377-3.254-3.342-3.254-2.276 0-3.612 1.707-3.612 3.471 0 .688.265 1.425.595 1.826a.24.24 0 0 1 .056.23c-.061.252-.196.796-.222.907-.035.146-.116.177-.268.107-1-.465-1.624-1.926-1.624-3.1 0-2.523 1.834-4.84 5.286-4.84 2.775 0 4.932 1.977 4.932 4.62 0 2.757-1.739 4.976-4.151 4.976-.811 0-1.573-.421-1.834-.919l-.498 1.902c-.181.695-.669 1.566-.995 2.097A8 8 0 1 0 8 0z" /></g></svg><p></p></a>
+</div>
+</div>
+</div>
+</div>
+      
+  </section>
+
+
+  </div>
+
+          </aside>
+                  </div>
+  </div>
+<center>
+<div class="billboardbottom"><!-- /21034905/cd_digikey_billboard_bottom -->
+<div id="div-gpt-ad-1626868066018-0" style="width: 970px; height: 250px;"><script type="9ed7aeb7ba36c64b3b7181b0-text/javascript">
+    googletag.cmd.push(function() { googletag.display('div-gpt-ad-1626868066018-0'); });
+  </script></div>
+</div>
+</center>
+
+<div class="subscribe">
+	<div class="row m-0">
+		<div class="col-md-3"></div>
+		<div class="col-md-6 text-center">
+			<div class="subscribe_inner">
+				<img src="/themes/circuitdigest/images/mail_img.png" width="100" height="100" alt="Newsletter subscription email icon">
+				<div class="subscribe-title"><b>Join 100K+ Subscribers</b></div>
+				<p>Your email is safe with us, we don’t spam.</p>
+				  <div class="region region-subscriber">
+    <section id="block-block-content-2c49af15-24dd-4f41-8676-7fef2ca8a967" class="block block-block-content block-block-content2c49af15-24dd-4f41-8676-7fef2ca8a967 clearfix">
+  
+    
+
+      
+            <div class="field field--name-body field--type-text-with-summary field--label-hidden field--item"><form accept-charset="utf-8" action="https://newsletter.semiconmedia.com/subscribe" class="subscribe_form" method="POST">
+<div class="input-group">
+<input aria-label="Email address" autocomplete="email" class="form-control" id="emailForSave" name="email" placeholder="Type your email address" required type="email">
+<div style="display:none;"><label for="hp">HP</label>
+<input id="hp" name="hp" type="text"></div>
+<input name="list" type="hidden" value="Jp3RJbs8p6z892RyfZMsCbXg">
+<input name="subform" type="hidden" value="yes"> <span class="input-group-btn"><br>
+<input class="btn btn-primary" id="submitEmail" type="submit" value="Subscribe"></span></div>
+</form>
+</div>
+      
+  </section>
+
+
+  </div>
+
+				<p>Be a part of our ever growing community.</p>
+			</div>
+		</div>
+		<div class="col-md-3"></div>
+	</div>
+
+</div>
+
+    <footer class="footer" id="footer" role="contentinfo">
+  <div class="cd-footer">
+    <div class="cd-footer__top">
+      <div class="cd-footer__brand footer-brand">
+          <div class="region region-footer1">
+    <section id="block-footer1" class="block block-block-content block-block-content890e9101-21c5-4bbc-8fe7-d7647a10fa41 clearfix">
+  
+    
+
+      
+            <div class="field field--name-body field--type-text-with-summary field--label-hidden field--item"><p><img src="/themes/circuitdigest/images/semicon_logo1.png" data-entity-uuid data-entity-type alt="semicon media logo" width="357" height="81" loading="lazy"></p>
+<p>Semicon Media is a unique collection of online media, focused purely on the Electronics Community across the globe. With a perfectly blended team of Engineers and Journalists, we demystify electronics and its related technologies by providing high value content to our readers.</p>
+<div class="footer-social-icons"><a href="https://www.whatsapp.com/channel/0029VaHpKHL4dTnG10R0h40u" target="_blank" rel="noopener" aria-label="WhatsApp">
+<svg viewBox="0 0 40 40" width="34" height="34" aria-hidden="true" focusable="false"><circle cx="20" cy="20" r="20" fill="#25D366" /><g transform="translate(10 10) scale(0.8333)" fill="#fff"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z" /></g></svg><p></p></a> <a href="https://www.instagram.com/circuit_digest/" target="_blank" rel="noopener" aria-label="Instagram">
+<svg viewBox="0 0 40 40" width="34" height="34" aria-hidden="true" focusable="false"><circle cx="20" cy="20" r="20" fill="#E4405F" /><g transform="translate(10 10) scale(0.8333)" fill="#fff"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z" /></g></svg><p></p></a> <a href="https://www.facebook.com/circuitdigest/" target="_blank" rel="noopener" aria-label="Facebook">
+<svg viewBox="0 0 40 40" width="34" height="34" aria-hidden="true" focusable="false"><circle cx="20" cy="20" r="20" fill="#1877F2" /><g transform="translate(10 10) scale(0.8333)" fill="#fff"><path d="M13.397 20.997v-8.196h2.765l.411-3.209h-3.176V7.548c0-.926.258-1.56 1.587-1.56h1.684V3.127A22.336 22.336 0 0014.201 3c-2.444 0-4.122 1.492-4.122 4.231v2.355H7.332v3.209h2.753v8.202h3.312z" /></g></svg><p></p></a> <a href="https://twitter.com/CircuitDigest" target="_blank" rel="noopener" aria-label="X">
+<svg viewBox="0 0 40 40" width="34" height="34" aria-hidden="true" focusable="false"><circle cx="20" cy="20" r="20" fill="#000000" /><g transform="translate(10 10) scale(0.8333)" fill="#fff"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" /></g></svg><p></p></a> <a href="https://www.youtube.com/channel/UCy3CUAIYgZdAOG9k3IPdLmw" target="_blank" rel="noopener" aria-label="YouTube">
+<svg viewBox="0 0 40 40" width="34" height="34" aria-hidden="true" focusable="false"><circle cx="20" cy="20" r="20" fill="#FF0000" /><g transform="translate(10 10) scale(0.8333)" fill="#fff"><path d="M23.498 6.186a3.016 3.016 0 00-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 00.502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 002.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 002.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z" /></g></svg><p></p></a> <a href="https://www.linkedin.com/company/circuit-digest/" target="_blank" rel="noopener" aria-label="LinkedIn">
+<svg viewBox="0 0 40 40" width="34" height="34" aria-hidden="true" focusable="false"><circle cx="20" cy="20" r="20" fill="#0A66C2" /><g transform="translate(10 10) scale(0.8333)" fill="#fff"><path d="M4.98 3.5c0 1.381-1.11 2.5-2.48 2.5S0 4.881 0 3.5 1.11 1 2.5 1s2.48 1.119 2.48 2.5zM.02 8h4.94v16H.02V8zm7.98 0h4.73v2.2h.07c.66-1.25 2.27-2.57 4.67-2.57 5 0 5.92 3.29 5.92 7.57V24h-4.94v-7.6c0-1.81-.03-4.14-2.52-4.14-2.52 0-2.91 1.97-2.91 4v7.74H8V8z" /></g></svg><p></p></a> <a href="https://in.pinterest.com/circuitdigest/" target="_blank" rel="noopener" aria-label="Pinterest">
+<svg viewBox="0 0 40 40" width="34" height="34" aria-hidden="true" focusable="false"><circle cx="20" cy="20" r="20" fill="#E60023" /><g transform="translate(10 10) scale(1.25)" fill="#fff"><path d="M8 0a8 8 0 0 0-2.915 15.452c-.07-.633-.134-1.606.027-2.297.146-.625.938-3.977.938-3.977s-.239-.479-.239-1.187c0-1.113.645-1.943 1.448-1.943.682 0 1.012.512 1.012 1.127 0 .686-.437 1.712-.663 2.663-.188.796.4 1.446 1.185 1.446 1.422 0 2.515-1.5 2.515-3.664 0-1.915-1.377-3.254-3.342-3.254-2.276 0-3.612 1.707-3.612 3.471 0 .688.265 1.425.595 1.826a.24.24 0 0 1 .056.23c-.061.252-.196.796-.222.907-.035.146-.116.177-.268.107-1-.465-1.624-1.926-1.624-3.1 0-2.523 1.834-4.84 5.286-4.84 2.775 0 4.932 1.977 4.932 4.62 0 2.757-1.739 4.976-4.151 4.976-.811 0-1.573-.421-1.834-.919l-.498 1.902c-.181.695-.669 1.566-.995 2.097A8 8 0 1 0 8 0z" /></g></svg><p></p></a> <a href="https://github.com/Circuit-Digest" target="_blank" rel="noopener" aria-label="GitHub">
+<svg viewBox="0 0 40 40" width="34" height="34" aria-hidden="true" focusable="false"><circle cx="20" cy="20" r="20" fill="#181717" /><g transform="translate(10 10) scale(0.8333)" fill="#fff"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12" /></g></svg><p></p></a></div>
+</div>
+      
+  </section>
+
+
+  </div>
+
+      </div>
+      <nav class="cd-footer__links" aria-label="Footer">
+          <div class="region region-footer2">
+    <section id="block-footer2" class="block block-block-content block-block-content6c310b38-6e4e-4294-abbf-5ec59d7caee3 clearfix">
+  
+    
+
+      
+            <div class="field field--name-body field--type-text-with-summary field--label-hidden field--item"><div class="cd-footer__col">
+<div class="cd-footer__title" id="cd-footer-news">News</div>
+<ul class="cd-footer__list" aria-labelledby="cd-footer-news">
+<li><a href="/news">Latest News</a></li>
+<li><a href="/community-news">Community News</a></li>
+<li><a href="/new-electronics-components">Product News</a></li>
+<li><a href="/industry-news">Business News</a></li>
+</ul>
+</div>
+<div class="cd-footer__col">
+<div class="cd-footer__title" id="cd-footer-content">Content</div>
+<ul class="cd-footer__list" aria-labelledby="cd-footer-content">
+<li><a href="/contests">Design Contests</a></li>
+<li><a href="/interviews">Interviews</a></li>
+<li><a href="/teardowns">Teardowns</a></li>
+<li><a href="/product-reviews">Product Reviews</a></li>
+<li><a href="/articles">Articles</a></li>
+<li><a href="/tutorials">Tutorials</a></li>
+<li><a href="/electronics-projects">Projects</a></li>
+<li><a href="/events">Partner Events</a></li>
+<li><a href="/calculators">Calculators</a></li>
+</ul>
+</div>
+</div>
+      
+  </section>
+
+
+  </div>
+
+          <div class="region region-footer3">
+    <section id="block-footer3" class="block block-block-content block-block-content9bcccf15-648d-4abe-be10-e8df2dcdee54 clearfix">
+  
+    
+
+      
+            <div class="field field--name-body field--type-text-with-summary field--label-hidden field--item"><div class="cd-footer__col">
+<div class="cd-footer__title" id="cd-footer-products">Products</div>
+<ul class="cd-footer__list" aria-labelledby="cd-footer-products">
+<li><a href="/arduino-projects">Arduino</a></li>
+<li><a href="/esp32-projects">ESP32</a></li>
+<li><a href="/simple-raspberry-pi-projects-for-beginners">Raspberry Pi</a></li>
+<li><a href="/raspberry-pi-pico-projects-and-tutorials">Raspberry Pi Pico</a></li>
+<li><a href="/arduino-uno-projects">Arduino Uno</a></li>
+<li><a href="/arduino-nano-projects">Arduino Nano</a></li>
+<li><a href="/esp8266-projects">ESP8266</a></li>
+<li><a href="/stm32-projects-and-tutorials">STM32</a></li>
+<li><a href="/esp32-cam-projects">ESP32-CAM</a></li>
+</ul>
+</div>
+<div class="cd-footer__col">
+<div class="cd-footer__title" id="cd-footer-applications">Applications</div>
+<ul class="cd-footer__list" aria-labelledby="cd-footer-applications">
+<li><a href="/tags/automotive">Automotive</a></li>
+<li><a href="/electric-vehicles">Electric Vehicles</a></li>
+<li><a href="/tags/industrial-applications">Industrial Automation</a></li>
+<li><a href="/robotics-projects">Robotics</a></li>
+<li><a href="/home-automation-projects">Smart Home</a></li>
+<li><a href="/tags/healthcare">Healthcare</a></li>
+<li><a href="/tags/wearables">Wearables</a></li>
+<li><a href="/drone-projects">Drones</a></li>
+<li><a href="/tags/solar">Solar &amp; Energy</a></li>
+</ul>
+</div>
+<div class="cd-footer__col">
+<div class="cd-footer__title" id="cd-footer-company">Company</div>
+<ul class="cd-footer__list" aria-labelledby="cd-footer-company">
+<li><a href="/about-us">About Us</a></li>
+<li><a href="/advertise">Advertise</a></li>
+<li><a href="/contact">Contact Us</a></li>
+<li><a href="/privacy-policy">Privacy Policy</a></li>
+<li><a href="/cookie-policy">Cookie Policy</a></li>
+<li><a href="/terms-of-use">Terms of Use</a></li>
+</ul>
+</div>
+</div>
+      
+  </section>
+
+
+  </div>
+
+      </nav>
+    </div>
+    <div class="cd-footer__network">
+        <div class="region region-footer4">
+    <section id="block-footer4" class="block block-block-content block-block-contente971054d-fffa-472a-8cad-7e9fe4e720dd clearfix">
+  
+    
+
+      
+            <div class="field field--name-body field--type-text-with-summary field--label-hidden field--item"><div class="cd-footer__title">Our Network</div>
+<div class="cd-footer-network">
+<a href="https://circuitdigest.com"><img src="https://circuitdigest.com/sites/default/files/circuitdigest_logo_0.png" alt="CircuitDigest" width="185" height="50" loading="lazy"></a> <a href="https://components101.com"><img src="https://components101.com/sites/default/files/components101_logo_2.png" alt="Components101" width="265" height="50" loading="lazy"></a> <a href="https://iotdesignpro.com"><img src="https://iotdesignpro.com/sites/default/files/IoTdesignpro-logo.png" alt="IoTDesignPro" width="182" height="50" loading="lazy"></a> <a href="https://www.circuitdigest.cloud/" target="_blank" rel="noopener"><img src="https://www.circuitdigest.cloud/assets/images/logo.png" alt="CircuitDigest Cloud" width="188" height="50" loading="lazy"></a> <a href="https://semiconlab.in/" target="_blank" rel="noopener"><img src="https://semiconlab.in/assets/images/logo.svg" alt="Semicon Lab" width="200" height="50" loading="lazy"></a>
+</div>
+</div>
+      
+  </section>
+
+
+  </div>
+
+    </div>
+  </div>
+    <div class="region region-footer">
+    <section id="block-footercopyrights" class="block block-block-content block-block-content77d75c31-b273-4df5-9c74-09d34bcf1376 clearfix">
+  
+    
+
+      
+            <div class="field field--name-body field--type-text-with-summary field--label-hidden field--item"><div class="bg_blue text-center footer-copyright">
+<p>Copyright © 2026&nbsp;<a href="/">Circuit Digest</a>. All rights reserved.</p>
+</div>
+</div>
+      
+  </section>
+
+
+  </div>
+
+</footer>
+  
+  </div>
+
+    
+    <script type="application/json" data-drupal-selector="drupal-settings-json">{"path":{"baseUrl":"\/","pathPrefix":"","currentPath":"node\/20899","currentPathIsAdmin":false,"isFront":false,"currentLanguage":"en"},"pluralDelimiter":"\u0003","suppressDeprecationErrors":true,"cdRecaptchaSrc":"https:\/\/www.google.com\/recaptcha\/api.js?hl=en\u0026render=explicit\u0026onload=drupalRecaptchaOnload","floatingBlock":{"blocks":[{"selector":".cd-rail-float","container":".main-container","padding_bottom":32}],"min_width":700},"bootstrap":{"forms_has_error_value_toggle":1,"modal_animation":1,"modal_backdrop":"true","modal_focus_input":1,"modal_keyboard":1,"modal_select_text":1,"modal_show":1,"modal_size":"","popover_enabled":1,"popover_animation":1,"popover_auto_close":1,"popover_container":"body","popover_content":"","popover_delay":"0","popover_html":0,"popover_placement":"right","popover_selector":"","popover_title":"","popover_trigger":"click","tooltip_enabled":1,"tooltip_animation":1,"tooltip_container":"body","tooltip_delay":"0","tooltip_html":0,"tooltip_placement":"auto left","tooltip_selector":"","tooltip_trigger":"hover"},"cdLazyPrism":true,"TBMegaMenu":{"TBElementsCounter":{"column":13},"theme":"circuitdigest"},"ajaxTrustedUrl":{"\/search\/node":true,"\/comment\/reply\/node\/20899\/comment_node_microcontroller":true},"user":{"uid":0,"permissionsHash":"14677d1af2569cb0740b7ce18af7928599d3f1518f063cdc68a4dea7c186b900"}}</script>
+<script src="/sites/default/files/js/js_HiU6A-T1KzEY-i3-XdyzN3BX6uslrPSTcMgtPqsFJlA.js?scope=footer&amp;delta=0&amp;language=en&amp;theme=circuitdigest&amp;include=eJxljmsSgyAMhC-EciQGQqRMgTAh6NjT176stv-y3ybZnRJZiSUYlwiuejpJBZGhR_ExYBMtF8z4wyrHltWCbiLOxhFJE7ZV_xH19SpVmpEPRIiSxKqAcsYi2nOvNo1vObh1mCMu28k5HPzQKpVGrMSZjMFu6_3VczwQBb0JZZPJ94T6pLZMxk_go7JiBFsFLlbv04GBN8neVhOIQsJxNwwWNcUkyPuzp7oDAwSLaQ" type="9ed7aeb7ba36c64b3b7181b0-text/javascript"></script>
+
+  <script src="/cdn-cgi/scripts/7d0fa10a/cloudflare-static/rocket-loader.min.js" data-cf-settings="9ed7aeb7ba36c64b3b7181b0-|49" defer></script><script type="module" src="https://static.cloudflareinsights.com/beacon.min.js/vce701823e78c4301a35b7e07294d87301792088814092" integrity="sha512-UKNk8GbxkABxKcXYuLkO16EleLGUkcvJWtpSNmExE0Too3ZaFAxTscNWEc1OdAv5/BikHawapSCaiD2XCmp+Bw==" data-cf-beacon='{"version":"2024.11.0","token":"e64ff1a9c9dd455e8e7a83f3b80f58f1","spa":2}' crossorigin="anonymous"></script>
+</body>
+</html>
